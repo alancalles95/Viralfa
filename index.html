@@ -127,6 +127,68 @@ h1 .l2{color:var(--lima);display:block}h1 .l3{display:block;color:transparent;-w
 .mini{margin:14px 0 4px;border-radius:10px;background:radial-gradient(circle at 50% 38%,#2e2e2b,#101010 78%);padding:10px 14px 8px;text-align:center}
 .mini svg{display:block;width:100%;max-width:320px;height:auto;margin:auto}
 #cotizar .mini small{color:#a1a198;margin:2px 0 0;font-size:.74rem}
+/* cotizador paso a paso */
+.wiz{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:0 clamp(16px,3vw,32px) 24px;min-width:0}
+.wiz-top{position:sticky;top:64px;z-index:3;background:#fff;padding:16px 0 2px;border-radius:10px 10px 0 0}
+.wiz-pasos{list-style:none;display:flex;gap:6px;margin:0;padding:0 0 2px;overflow-x:auto;scrollbar-width:none}
+.wiz-pasos::-webkit-scrollbar{display:none}
+.wiz-pasos button{border:1px solid var(--linea);background:#f8f9f4;border-radius:999px;padding:6px 12px;font-size:.8rem;font-weight:700;color:#7a8070;white-space:nowrap}
+.wiz-pasos button:disabled{opacity:.5;cursor:default}
+.wiz-pasos li.hecho button{color:#2c4120;border-color:#b9cf8a;background:#f1f8e2}
+.wiz-pasos li.hecho button:before{content:"✓ "}
+.wiz-pasos li.actual button{background:var(--ink);color:var(--verde);border-color:var(--ink)}
+.wiz-barra{height:3px;background:#ecefe4;border-radius:3px;margin-top:12px;overflow:hidden}
+.wiz-barra i{display:block;height:100%;width:16.7%;background:#4d6b00;transition:width .3s}
+.wp{padding-top:20px}
+.wp h3{display:flex;align-items:center;gap:12px;font-size:clamp(1.25rem,2.2vw,1.55rem);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.wp h3 span{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--verde);font-size:1rem}
+.wp-ayuda{color:#5a6150;margin:8px 0 16px;font-size:.95rem}
+.wp-sub{font-weight:700;margin:20px 0 8px}
+.wp-nav{display:flex;justify-content:space-between;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid var(--linea)}
+.sel-oculto{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.cards-chico{grid-template-columns:repeat(auto-fill,minmax(125px,1fr))}
+#cotizar .cards label{position:relative;display:block;cursor:pointer;padding:14px 38px 13px 14px;border:1px solid var(--linea);border-radius:8px;background:#fafbf7}
+.cards input{position:absolute;opacity:0;pointer-events:none}
+.cards label:after{content:"";position:absolute;right:13px;top:15px;width:15px;height:15px;border-radius:50%;border:1.5px solid #9aa38c;background:#fff;box-sizing:border-box}
+#cotizar .cards label:has(input:checked){border:2px solid #2c4120;padding:13px 37px 12px 13px;background:#eef7d6}
+.cards label:has(input:checked):after{border:5px solid #2c4120;right:12px;top:14px}
+.cards label:has(input:focus-visible){outline:3px solid #63982c;outline-offset:2px}
+.cards strong{display:block;font-size:1rem;line-height:1.25}
+#cotizar .cards small{margin:4px 0 0}
+.cards .sw{margin-right:7px;vertical-align:-3px;width:15px;height:15px}
+.resumen{list-style:none;margin:0;padding:0;border-top:1px solid var(--linea)}
+.resumen li{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--linea);font-size:.95rem}
+.resumen li span{color:#5a6150;flex:none}
+.resumen li b{text-align:right;font-weight:600}
+.resumen button{border:0;background:none;color:#4d6b00;font-weight:700;padding:0;margin-left:10px;text-decoration:underline;font-size:.88rem}
+.final{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0 16px}
+.final div{background:#f2f7e6;border-radius:8px;padding:14px 16px}
+.final span{display:block;font-size:.84rem;color:#5a6150}
+.final strong{font-size:clamp(1.35rem,3vw,1.75rem);letter-spacing:-.03em}
+.grande{width:100%;min-height:56px;font-size:1.06rem}
+#cotizar small.centro{text-align:center}
+.pu{padding:2px 0 12px;border-bottom:1px solid #e3e6da}
+.pu>span{display:block;font-size:.76rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#5a6150}
+.pu strong{display:block;font-size:2.5rem;letter-spacing:-.045em;line-height:1.05;margin:6px 0 4px;transition:color .3s}
+.pu strong.cambio{color:#4d6b00}
+#cotizar .pu small{margin:0;color:#5a6150}
+.pu-lista{list-style:none;margin:6px 0 0;padding:0}
+.pu-lista li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;font-size:.9rem;border-bottom:1px dashed #e3e6da}
+.pu-lista li.pend{color:#a6ab9a}
+.pu-lista b{white-space:nowrap}
+.pu-sub{display:flex;justify-content:space-between;gap:10px;padding:10px 0 2px;font-weight:700}
+.detalle{margin:12px 0 4px}
+.detalle summary{cursor:pointer;font-weight:700;font-size:.9rem;color:#4d6b00}
+.ticket .total,.ticket .fin{display:none}
+#cotizar[data-paso="6"] .ticket .total{display:flex}
+#cotizar:not([data-paso="6"]) .detalle,#cotizar:not([data-paso="6"]) #aviso{display:none}
+body[data-paso="6"] .barra-total{display:none!important}
+.cards-color{grid-template-columns:repeat(3,minmax(0,1fr))}
+#cotizar .cards-color label,#cotizar .cards-color label:has(input:checked){padding:12px 8px;text-align:center}
+#cotizar .cards-color label:has(input:checked){padding:11px 7px}
+.cards-color label:after{display:none}
+
 .cajas a{color:var(--txt);font-weight:600}
 
 /* cotizador (banda clara) */
@@ -249,6 +311,9 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
  .hero-bg:after{background:linear-gradient(180deg,rgba(11,11,11,.35) 0%,var(--bg) 92%)}
  .layout,.bloque,.campos{grid-template-columns:1fr}
  .ticket{position:static}
+ .wiz-top{top:60px}
+ .final{grid-template-columns:1fr}
+ .wp-nav .btn{flex:1}
  .rapidos{grid-template-columns:repeat(2,1fr)}
  .pq{grid-template-columns:1fr}.pq img{aspect-ratio:16/10}
  .wa-float{display:none}
@@ -341,26 +406,60 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
 <section id="cotizar" class="sec"><div class="wrap">
  <p class="eyebrow">Cotizador online</p>
  <h2>Calculá<br>tu precio.</h2>
- <p class="lead">Elegí cantidad, variedad y envase. Ves el precio final al instante.</p>
+ <p class="lead">Armá tu pedido paso a paso. En cada elección ves cuánto te sale cada alfajor.</p>
  <div class="garant"><span>IVA incluido</span><span>Sin registrarte</span><span>Sin compromiso</span></div>
  <div class="layout">
-  <div class="config" id="elecciones">
-   <fieldset><legend>Cantidad de alfajores</legend><div class="rapidos" id="rapidos"></div><label class="enlinea">Cantidad exacta <input type="number" id="unidades" value="500" min="500" max="1000000" inputmode="numeric" required></label><small id="escala"></small></fieldset>
-   <fieldset><legend>El alfajor</legend><div class="campos"><label>Variedad<select id="sabor"></select></label><label>Peso por alfajor<select id="gramos"></select></label></div><p role="status" id="notaCatalogo"></p><button class="btn borde" type="button" id="reintentar" hidden>Volver a cargar productos</button></fieldset>
-   <fieldset><legend>Tu marca en el envoltorio</legend><p class="ayudaForm">Elegí cómo va tu marca en el paquete. Esto no cambia la forma del alfajor.</p>
+  <div class="wiz" id="elecciones">
+   <div class="wiz-top"><ol class="wiz-pasos" id="wizPasos"><li><button type="button" data-ir="1">Cantidad</button></li><li><button type="button" data-ir="2">Alfajor</button></li><li><button type="button" data-ir="3">Envase</button></li><li><button type="button" data-ir="4">Cajas</button></li><li><button type="button" data-ir="5">Diseño</button></li><li><button type="button" data-ir="6">Resumen</button></li></ol><div class="wiz-barra"><i id="wizProgreso"></i></div></div>
+
+   <section class="wp" data-paso="1"><h3><span>1</span>¿Cuántos alfajores necesitás?</h3><p class="wp-ayuda">Pedido mínimo 500 unidades. A más cantidad, mejor precio por alfajor.</p>
+    <div class="rapidos" id="rapidos"></div>
+    <label class="enlinea">Otra cantidad <input type="number" id="unidades" value="500" min="500" max="1000000" inputmode="numeric" required></label><small id="escala"></small>
+    <div class="wp-nav"><span></span><button type="button" class="btn negro" data-sig>Siguiente: el alfajor →</button></div></section>
+
+   <section class="wp" data-paso="2" hidden><h3><span>2</span>Elegí tu alfajor</h3><p class="wp-ayuda">Variedad y peso de cada alfajor.</p>
+    <div class="cards" id="cardsSabor" role="radiogroup" aria-label="Variedad"></div>
+    <p class="wp-sub">Peso por alfajor</p><div class="cards cards-chico" id="cardsGramos" role="radiogroup" aria-label="Peso por alfajor"></div>
+    <div class="sel-oculto" aria-hidden="true"><select id="sabor" tabindex="-1"></select><select id="gramos" tabindex="-1"></select></div>
+    <p role="status" id="notaCatalogo"></p><button class="btn borde" type="button" id="reintentar" hidden>Volver a cargar productos</button>
+    <div class="wp-nav"><button type="button" class="btn borde" data-ant>← Atrás</button><button type="button" class="btn negro" data-sig>Siguiente: el envase →</button></div></section>
+
+   <section class="wp" data-paso="3" hidden><h3><span>3</span>¿Cómo va tu marca en el envoltorio?</h3><p class="wp-ayuda">Esto no cambia la forma del alfajor: es cómo se ve tu marca en el paquete.</p>
     <div class="envChoices" aria-label="Cómo va tu marca en el envoltorio" role="radiogroup"><label><input type="radio" name="envase" value="redonda" checked><i class="paq p-circ"></i><strong>Etiqueta redonda</strong><small>Ø 6 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="rectangular"><i class="paq p-rect"></i><strong>Etiqueta rectangular</strong><small>5 × 12 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="bobina"><i class="paq p-full"></i><strong>Envoltorio impreso</strong><small>Tu diseño full color en todo el paquete</small></label></div>
+    <div id="grupoColor"><p class="wp-sub">Color del envoltorio liso</p><div class="cards cards-color" id="cardsColor" role="radiogroup" aria-label="Color del envoltorio"></div><div class="sel-oculto" aria-hidden="true"><select id="color" tabindex="-1"></select></div></div>
     <div class="mini"><div id="miniPaq"></div><small>Vista ilustrativa de tu envase</small></div>
     <p id="tipoEnvase" class="ayudaEnvase"></p>
-    <div id="grupoColor"><label for="color">Color del envoltorio liso</label><select id="color"></select></div>
-   </fieldset>
-   <fieldset><legend>Cajas y diseño</legend><label>Presentación de las cajas<select id="caja"></select></label><small id="cantidadCajas"></small><label>Diseño del envase<select id="arte"></select></label><div id="campoReserva" hidden><label>Código de tu bobina reservada (opcional)<input id="reserva" maxlength="35" autocomplete="off" placeholder="Código que te entregó VIRALFA"></label><small>Si todavía no tenés el código, enviá tu consulta y revisamos el saldo de tu diseño.</small></div></fieldset>
+    <div class="wp-nav"><button type="button" class="btn borde" data-ant>← Atrás</button><button type="button" class="btn negro" data-sig>Siguiente: las cajas →</button></div></section>
+
+   <section class="wp" data-paso="4" hidden><h3><span>4</span>¿Querés cajas?</h3><p class="wp-ayuda">Opcional. Para exhibir en mostrador o para transporte y stock.</p>
+    <div class="cards" id="cardsCaja" role="radiogroup" aria-label="Cajas"></div>
+    <div class="sel-oculto" aria-hidden="true"><select id="caja" tabindex="-1"></select></div><small id="cantidadCajas"></small>
+    <div class="wp-nav"><button type="button" class="btn borde" data-ant>← Atrás</button><button type="button" class="btn negro" data-sig>Siguiente: el diseño →</button></div></section>
+
+   <section class="wp" data-paso="5" hidden><h3><span>5</span>¿Tenés el diseño?</h3><p class="wp-ayuda">El arte de tu etiqueta o de tu envoltorio.</p>
+    <div class="cards" id="cardsArte" role="radiogroup" aria-label="Diseño"></div>
+    <div class="sel-oculto" aria-hidden="true"><select id="arte" tabindex="-1"></select></div>
+    <div id="campoReserva" hidden><label>Código de tu bobina reservada (opcional)<input id="reserva" maxlength="35" autocomplete="off" placeholder="Código que te entregó VIRALFA"></label><small>Si todavía no tenés el código, enviá tu consulta y revisamos el saldo de tu diseño.</small></div>
+    <div class="wp-nav"><button type="button" class="btn borde" data-ant>← Atrás</button><button type="button" class="btn negro" data-sig>Ver mi cotización →</button></div></section>
+
+   <section class="wp" data-paso="6" hidden><h3><span>6</span>Tu pedido</h3><p class="wp-ayuda">Revisá tus elecciones. Podés cambiar cualquiera.</p>
+    <ul class="resumen" id="resumenLista"></ul>
+    <div class="final"><div><span>Precio por alfajor</span><strong id="finalUnidad">—</strong></div><div><span>Total sin flete</span><strong id="finalTotal">—</strong></div></div>
+    <button type="button" class="btn btn-lima grande" id="irContacto">Recibir esta cotización →</button>
+    <small class="centro">Te la enviamos y la guardás en PDF. Sin compromiso de compra.</small>
+    <div class="wp-nav"><button type="button" class="btn borde" data-ant>← Atrás</button><span></span></div></section>
   </div>
-  <aside class="ticket" id="ticket"><div class="ticketbar"><b>VIRALFA</b><span>Cotización</span></div>
-   <div class="int"><h3>Tu presupuesto</h3><p id="descripcion"></p><p id="notaBobina" hidden></p>
+
+  <aside class="ticket" id="ticket"><div class="ticketbar"><b>VIRALFA</b><span>Tu cotización</span></div>
+   <div class="int">
+    <div class="pu"><span id="puEtiqueta">Precio por alfajor</span><strong id="puValor">—</strong><small id="puNota">Calculando…</small></div>
+    <ul class="pu-lista" id="puLista"></ul>
+    <div class="pu-sub"><span id="puSubEtiq">Subtotal</span><b id="puSub">—</b></div>
     <div id="plazo" aria-live="polite"><strong id="dias"></strong><span id="razonPlazo"></span><small>Desde la aprobación de los diseños finales. El envío a tu localidad se coordina aparte.</small></div>
-    <div id="lineas"></div><p id="aviso" role="status">Calculando…</p></div>
+    <details class="detalle"><summary>Ver detalle completo</summary><p id="descripcion"></p><p id="notaBobina" hidden></p><div id="lineas"></div></details>
+    <p id="aviso" role="status">Calculando…</p></div>
    <div class="total"><span>Total sin flete</span><strong id="total">Calculando…</strong></div>
-   <div class="int"><button class="btn negro" id="continuar">Recibir esta cotización</button><small>Te la enviamos y la guardás en PDF. Sin compromiso de compra.</small></div>
+   <div class="int fin"><button class="btn negro" id="continuar">Recibir esta cotización</button><small>Te la enviamos y la guardás en PDF. Sin compromiso de compra.</small></div>
   </aside>
  </div>
  <section id="contacto" class="bloque" hidden><div><p class="eyebrow">Último paso</p><h3>¿A quién le enviamos la cotización?</h3><p>Dejanos tu WhatsApp o tu correo. Te contactamos para coordinar diseño y envío.</p></div>
@@ -433,7 +532,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
 </div></footer>
 
 <a class="wa-float" href="https://wa.me/542926468237?text=Hola%20VIRALFA%2C%20quiero%20consultar%20por%20alfajores%20con%20mi%20marca." target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp" data-wa="flotante"><svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 9.9 9.9 5.2 16 5.2s11 4.7 11 10.6-4.9 10.6-11 10.6zm6-7.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.6-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg></a>
-<a class="barra-total" id="barraTotal" href="#ticket" hidden><span>Total sin flete<em>Ver detalle ↓</em></span><strong id="barraMonto">—</strong></a>
+<a class="barra-total" id="barraTotal" href="#ticket" hidden><span>Precio por alfajor<em id="barraSub">Ver detalle ↓</em></span><strong id="barraMonto">—</strong></a>
 <div class="barra" id="barra"><a href="#cotizar" class="btn btn-lima">Calcular mi precio</a><a href="https://wa.me/542926468237?text=Hola%20VIRALFA%2C%20quiero%20consultar%20por%20alfajores%20con%20mi%20marca." class="btn btn-wa" target="_blank" rel="noopener" aria-label="WhatsApp" data-wa="barra"><svg class="wa-ico" viewBox="0 0 32 32" fill="#06290f" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 9.9 9.9 5.2 16 5.2s11 4.7 11 10.6-4.9 10.6-11 10.6z"/></svg></a></div>
 </div>
 <article id="hoja"></article>
@@ -622,6 +721,89 @@ function vfPaquete(env, color, uid){
  const pintarMini=()=>{const e=(document.querySelector("[name=envase]:checked")||{}).value||"redonda";mini.innerHTML=vfPaquete(e,document.getElementById("color").value||"negro","mini")};
  form.addEventListener("input",pintarMini);form.addEventListener("change",pintarMini);pintarMini();
 })();
+/* Cotizador paso a paso con precio por alfajor en vivo */
+(function(){
+ const g=id=>document.getElementById(id),cot=g("cotizar"),wiz=g("elecciones");
+ const pasos=[...wiz.querySelectorAll(".wp")],chips=[...g("wizPasos").querySelectorAll("li")];
+ let paso=1,maxPaso=1;
+ const info={caja:{ninguna:"Solo los alfajores envasados.",displayImpresa:"Exhibidor de mostrador con tu marca. Producción en 30 días.",cartonLisa:"Caja de cartón lisa para transporte y stock.",cartonImpresa:"Caja de cartón con tu marca impresa."},
+  arte:{necesito:"Lo diseñamos con vos. Pago único en el primer pedido.",propio:"Nos mandás tu archivo listo, según el plano.",reposicion:"Repetís un pedido con el mismo diseño."}};
+ const swc={negro:"sw-negro",dorado:"sw-dorado",plateado:"sw-plateado"};
+ const prod=id=>(catalogo||[]).find(x=>x.id===id);
+ function tarjetas(selId,contId){
+  const s=g(selId),c=g(contId);
+  const render=()=>{c.replaceChildren();[...s.options].forEach(o=>{
+   const l=document.createElement("label"),i=document.createElement("input"),st=document.createElement("strong");
+   i.type="radio";i.name="w_"+selId;i.value=o.value;i.checked=o.value===s.value;
+   if(selId==="color"){const k=document.createElement("i");k.className="sw "+(swc[o.value]||"");st.append(k)}
+   st.append(o.text);l.append(i,st);
+   const d=selId==="sabor"?(prod(o.value)?.gramos||[]).map(x=>x+" g").join(" · "):(info[selId]||{})[o.value];
+   if(d){const sm=document.createElement("small");sm.textContent=d;l.append(sm)}
+   c.append(l)})};
+  c.addEventListener("input",e=>e.stopPropagation());
+  c.addEventListener("change",e=>{if(e.target.name!=="w_"+selId)return;e.stopPropagation();s.value=e.target.value;s.dispatchEvent(new Event("input",{bubbles:true}))});
+  new MutationObserver(render).observe(s,{childList:true});render();
+  return ()=>c.querySelectorAll("input").forEach(i=>i.checked=i.value===s.value);
+ }
+ const sincros=["sabor:cardsSabor","gramos:cardsGramos","color:cardsColor","caja:cardsCaja","arte:cardsArte"].map(x=>tarjetas(...x.split(":")));
+ const sincronizar=()=>sincros.forEach(f=>f());
+ wiz.addEventListener("input",sincronizar);wiz.addEventListener("change",sincronizar);
+
+ const validar=p=>{
+  if(p===1){const u=g("unidades");if(!u.validity.valid){u.reportValidity();return false}}
+  if(p===2&&!g("sabor").value){g("notaCatalogo").textContent="Elegí una variedad para seguir.";return false}
+  return true};
+ function ir(n,mover=true){
+  n=Math.max(1,Math.min(6,n));
+  for(let k=paso;k<n;k++)if(!validar(k))return;
+  paso=n;maxPaso=Math.max(maxPaso,n);
+  pasos.forEach(s=>s.hidden=Number(s.dataset.paso)!==n);
+  chips.forEach((li,k)=>{const i=k+1;li.classList.toggle("actual",i===n);li.classList.toggle("hecho",i!==n&&i<=maxPaso);li.querySelector("button").disabled=i>maxPaso});
+  g("wizProgreso").style.width=(n/6*100)+"%";cot.dataset.paso=n;document.body.dataset.paso=n;
+  const ol=g("wizPasos"),ch=chips[n-1];ol.scrollLeft=ch.offsetLeft-ol.offsetLeft-(ol.clientWidth-ch.offsetWidth)/2;
+  if(n===6)resumen();
+  panel();
+  if(mover){const r=wiz.getBoundingClientRect();if(r.top<0||r.top>innerHeight*.45)wiz.scrollIntoView({behavior:"smooth",block:"start"})}
+  if(mover&&window.fbq)fbq("trackCustom","CotizadorPaso",{paso:n});
+ }
+ wiz.addEventListener("click",e=>{const b=e.target.closest("[data-sig],[data-ant],[data-ir],[data-cambiar]");if(!b)return;
+  if(b.hasAttribute("data-sig"))ir(paso+1);else if(b.hasAttribute("data-ant"))ir(paso-1);else ir(Number(b.dataset.ir||b.dataset.cambiar))});
+
+ function resumen(){
+  const p=getP(),pr=prod(p.sabor),ul=g("resumenLista");ul.replaceChildren();
+  [[1,"Cantidad",num(p.unidades||0)+" alfajores"],[2,"Alfajor",(pr?pr.nombre:"—")+" · "+p.gramos+" g"],
+   [3,"Envase",envases[p.envase]+(p.color?" · envoltorio "+colores[p.color].toLowerCase():"")],[4,"Cajas",cajas[p.caja]],[5,"Diseño",artes[p.arte]]]
+  .forEach(([n,k,v])=>{const li=document.createElement("li"),s=document.createElement("span"),b=document.createElement("b"),c=document.createElement("button");
+   s.textContent=k;b.textContent=v;c.type="button";c.dataset.cambiar=n;c.textContent="Cambiar";b.append(c);li.append(s,b);ul.append(li)});
+ }
+ g("irContacto").addEventListener("click",()=>g("continuar").click());
+ new MutationObserver(()=>{if(!g("ok").hidden){g("irContacto").hidden=true}}).observe(g("ok"),{attributes:true,attributeFilter:["hidden"]});
+
+ let ultimoValor="";
+ function panel(){
+  const r=ultimo,u=Number(g("unidades").value)||0,p=getP(),lista=g("puLista"),val=g("puValor");
+  const filas=[[2,"Alfajor"],[3,p.envase==="bobina"?"Envoltorio impreso":"Envoltorio y etiqueta"],[4,"Cajas"],[5,"Diseño"]];
+  const hasta=Math.max(2,Math.min(paso,5)),i=r&&r.importes;
+  const montos=i?{2:i.alfajores||0,3:p.envase==="bobina"?(i.material||0)+(i.mano||0):(i.envase||0),4:r.cantCajas?(i.cajasTotal||0):0,5:p.arte==="necesito"?(i.diseno||0):0}:{};
+  lista.replaceChildren();let sub=0;
+  filas.forEach(([n,nombre])=>{const li=document.createElement("li"),a=document.createElement("span"),b=document.createElement("b");a.textContent=nombre;
+   if(n>hasta){li.className="pend";b.textContent="Paso "+n}
+   else if(!i){b.textContent="…"}
+   else{const m=montos[n];sub+=m;b.textContent=m?((n===2?"":"+ ")+pesos(Math.round(m/u))+" c/u"):(n===4?"Sin cajas":"Sin costo")}
+   li.append(a,b);lista.append(li)});
+  if(i&&hasta>=5)sub=i.total;
+  const calc=g("total").textContent==="Calculando…";
+  if(!i||!u){val.textContent=calc?"…":"A consultar";g("puNota").textContent=calc?"Calculando…":"Te confirmamos el precio de esta combinación.";g("puSub").textContent="—";g("finalUnidad").textContent=val.textContent;g("finalTotal").textContent=g("total").textContent;return}
+  const pu=pesos(Math.round(sub/u));
+  val.textContent=pu;if(pu!==ultimoValor){val.classList.add("cambio");setTimeout(()=>val.classList.remove("cambio"),700);ultimoValor=pu}
+  g("puEtiqueta").textContent=hasta>=5?"Precio final por alfajor":"Precio por alfajor";
+  g("puNota").textContent=["","","Alfajor sin envase. Faltan envase, cajas y diseño.","Alfajor envasado con tu marca. Faltan cajas y diseño.","Alfajor envasado con cajas. Falta el diseño.","Todo incluido, con IVA. Sin flete."][hasta];
+  g("puSubEtiq").textContent="Subtotal · "+num(u)+" alfajores";g("puSub").textContent=pesos(sub);
+  g("finalUnidad").textContent=pesos(Math.round(i.total/u));g("finalTotal").textContent=pesos(i.total);
+ }
+ new MutationObserver(panel).observe(g("total"),{childList:true,characterData:true,subtree:true});
+ ir(1,false);
+})();
 /* Medición para anuncios (Meta Pixel). Pegá tu ID de píxel entre las comillas para activarlo. */
 const VF_PIXEL_ID="";
 /* Aviso por mail de cada cotización. Pegá tu access key de web3forms.com entre las comillas. */
@@ -673,7 +855,7 @@ const VF_MAIL_KEY="f22d6233-016d-48c9-a686-fdae1fc9bee5";
   let enForm=false,enTicket=false;const upd=()=>{bt.hidden=!(enForm&&!enTicket)};
   new IntersectionObserver(es=>{enForm=es[0].isIntersecting;upd()},{threshold:0}).observe(document.getElementById("elecciones"));
   new IntersectionObserver(es=>{enTicket=es[0].isIntersecting;upd()},{threshold:.25}).observe(document.getElementById("ticket"));
-  const copia=()=>{monto.textContent=tot.textContent};copia();new MutationObserver(copia).observe(tot,{childList:true,characterData:true,subtree:true});
+  const pv=document.getElementById("puValor"),ps=document.getElementById("puSub"),bs=document.getElementById("barraSub");const copia=()=>{monto.textContent=pv.textContent;bs.textContent=ps.textContent!=="—"?"Subtotal "+ps.textContent:"Ver detalle ↓"};copia();new MutationObserver(copia).observe(pv,{childList:true,characterData:true,subtree:true});
  }
  document.getElementById("anio").textContent=new Date().getFullYear();
 })();
