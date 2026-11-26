@@ -157,6 +157,22 @@ h1 .l2{color:var(--lima);display:block}h1 .l3{display:block;color:transparent;-w
 .cards strong{display:block;font-size:1rem;line-height:1.25}
 #cotizar .cards small{margin:4px 0 0}
 .cards .sw{margin-right:7px;vertical-align:-3px;width:15px;height:15px}
+.cant-final{background:#f6f8f0;border:1px solid var(--linea);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.cf-fila{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#cotizar .cf-fila label{font-weight:700}
+.stepper{display:flex;align-items:stretch;border:1px solid #a5ac9c;border-radius:6px;overflow:hidden;background:#fff}
+.stepper button{width:44px;border:0;background:#eef1e6;font-size:1.3rem;font-weight:700;color:var(--ink)}
+.stepper button:active{background:#dfe5d2}
+#cotizar .stepper input[type=number]{width:110px;margin:0;border:0;border-left:1px solid #d5d9ca;border-right:1px solid #d5d9ca;border-radius:0;text-align:center;font-weight:700;font-size:1.05rem;min-height:44px;-moz-appearance:textfield}
+.stepper input:focus-visible{outline:none}.stepper:focus-within{outline:3px solid #63982c;outline-offset:2px}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.cf-rapidos{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.cf-rapidos button{border:1px solid var(--linea);background:#fff;border-radius:999px;padding:6px 14px;font-weight:700;font-size:.88rem;color:var(--ink)}
+.cf-rapidos button[aria-pressed=true]{background:var(--ink);color:var(--verde);border-color:var(--ink)}
+#cotizar .cant-final small{margin:8px 0 0}
+.final strong{transition:color .3s}.final strong.cambio{color:#4d6b00}
+.btn-resumen{display:none;width:100%;margin-top:10px}
+#cotizar[data-visto6] .btn-resumen{display:inline-flex}
 .resumen{list-style:none;margin:0;padding:0;border-top:1px solid var(--linea)}
 .resumen li{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--linea);font-size:.95rem}
 .resumen li span{color:#5a6150;flex:none}
@@ -449,7 +465,9 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
     <div id="campoReserva" hidden><label>Código de tu bobina reservada (opcional)<input id="reserva" maxlength="35" autocomplete="off" placeholder="Código que te entregó VIRALFA"></label><small>Si todavía no tenés el código, enviá tu consulta y revisamos el saldo de tu diseño.</small></div>
     <div class="wp-nav"><button type="button" class="btn borde" data-ant>← Atrás</button><button type="button" class="btn negro" data-sig>Ver mi cotización →</button></div></section>
 
-   <section class="wp" data-paso="6" hidden><h3><span>6</span>Tu pedido</h3><p class="wp-ayuda">Revisá tus elecciones. Podés cambiar cualquiera.</p>
+   <section class="wp" data-paso="6" hidden><h3><span>6</span>Tu pedido</h3><p class="wp-ayuda">Revisá tus elecciones. Podés cambiar la cantidad acá mismo y ver cómo cambia el precio.</p>
+    <div class="cant-final"><div class="cf-fila"><label for="cantFinal">Cantidad de alfajores</label><div class="stepper"><button type="button" data-delta="-100" aria-label="Restar 100">−</button><input type="number" id="cantFinal" min="500" max="1000000" step="100" inputmode="numeric"><button type="button" data-delta="100" aria-label="Sumar 100">+</button></div></div>
+     <div class="cf-rapidos" id="cfRapidos"></div><small id="cfNota"></small></div>
     <ul class="resumen" id="resumenLista"></ul>
     <div class="final"><div><span>Precio por alfajor</span><strong id="finalUnidad">—</strong></div><div><span>Total a pagar sin flete</span><strong id="finalTotal">—</strong></div></div>
     <p class="final-nota" id="finalNota" hidden></p>
@@ -773,7 +791,7 @@ function vfPaquete(env, color, uid){
   chips.forEach((li,k)=>{const i=k+1;li.classList.toggle("actual",i===n);li.classList.toggle("hecho",i!==n&&i<=maxPaso);li.querySelector("button").disabled=i>maxPaso});
   g("wizProgreso").style.width=(n/6*100)+"%";cot.dataset.paso=n;document.body.dataset.paso=n;
   const ol=g("wizPasos"),ch=chips[n-1];ol.scrollLeft=ch.offsetLeft-ol.offsetLeft-(ol.clientWidth-ch.offsetWidth)/2;
-  if(n===6)resumen();
+  if(n===6){resumen();cfSync();cot.dataset.visto6="1"}
   panel();
   if(mover){const r=wiz.getBoundingClientRect();if(r.top<0||r.top>innerHeight*.45)wiz.scrollIntoView({behavior:"smooth",block:"start"})}
   if(mover&&window.fbq)fbq("trackCustom","CotizadorPaso",{paso:n});
@@ -783,12 +801,24 @@ function vfPaquete(env, color, uid){
 
  function resumen(){
   const p=getP(),pr=prod(p.sabor),ul=g("resumenLista");ul.replaceChildren();
-  [[1,"Cantidad",num(p.unidades||0)+" alfajores"],[2,"Alfajor",(pr?pr.nombre:"—")+" · "+p.gramos+" g"],
+  [[2,"Alfajor",(pr?pr.nombre:"—")+" · "+p.gramos+" g"],
    [3,"Envase",envases[p.envase]+(p.color?" · envoltorio "+colores[p.color].toLowerCase():"")],[4,"Cajas",cajas[p.caja]],[5,"Diseño",artes[p.arte]]]
   .forEach(([n,k,v])=>{const li=document.createElement("li"),s=document.createElement("span"),b=document.createElement("b"),c=document.createElement("button");
    s.textContent=k;b.textContent=v;c.type="button";c.dataset.cambiar=n;c.textContent="Cambiar";b.append(c);li.append(s,b);ul.append(li)});
  }
  g("irContacto").addEventListener("click",()=>g("continuar").click());
+ /* Cantidad editable en el resumen */
+ const uni=g("unidades"),cf=g("cantFinal"),cfr=g("cfRapidos");
+ escalas.forEach(q=>{const b=document.createElement("button");b.type="button";b.dataset.cq=q;b.textContent=num(q);cfr.append(b)});
+ const cfSync=()=>{if(document.activeElement!==cf)cf.value=uni.value;cfr.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(Number(b.dataset.cq)===Number(uni.value))));g("cfNota").textContent=g("escala").textContent+" A más cantidad, mejor precio por alfajor."};
+ const cfAplicar=v=>{v=Math.round(Number(v));if(!(v>=500&&v<=1000000)){g("cfNota").textContent="La cantidad mínima es 500 alfajores.";return}if(String(v)!==uni.value){uni.value=v;uni.dispatchEvent(new Event("input",{bubbles:true}))}cfSync()};
+ let cfT;cf.addEventListener("input",e=>{e.stopPropagation();clearTimeout(cfT);cfT=setTimeout(()=>cfAplicar(cf.value),450)});
+ cf.addEventListener("change",e=>{e.stopPropagation();clearTimeout(cfT);if(Number(cf.value)>=500)cfAplicar(cf.value);else{cf.value=500;cfAplicar(500);g("cfNota").textContent="La cantidad mínima es 500 alfajores."}});
+ g("elecciones").querySelector(".stepper").addEventListener("click",e=>{const b=e.target.closest("[data-delta]");if(!b)return;const v=Math.max(500,(Number(uni.value)||500)+Number(b.dataset.delta));cf.value=v;cfAplicar(v)});
+ cfr.addEventListener("click",e=>{const b=e.target.closest("[data-cq]");if(b){cf.value=b.dataset.cq;cfAplicar(b.dataset.cq)}});
+ uni.addEventListener("input",cfSync);
+ /* Después de ver el resumen, cada paso tiene "Volver al resumen" */
+ pasos.slice(0,5).forEach(s=>{const b=document.createElement("button");b.type="button";b.className="btn btn-lima btn-resumen";b.dataset.ir="6";b.textContent="Listo, volver al resumen →";s.append(b)});
  new MutationObserver(()=>{if(!g("ok").hidden){g("irContacto").hidden=true}}).observe(g("ok"),{attributes:true,attributeFilter:["hidden"]});
 
  let ultimoValor="";
@@ -817,7 +847,7 @@ function vfPaquete(env, color, uid){
   g("puNota").textContent=inv?("Con la bobina prorrateada en "+num(RINDE_BOBINA)+" alfajores. "+(falta||"Todo incluido, con IVA. Sin flete.")):["","","Alfajor sin envase. Faltan envase, cajas y diseño.","Alfajor envasado con tu marca. Faltan cajas y diseño.","Alfajor envasado con cajas. Falta el diseño.","Todo incluido, con IVA. Sin flete."][hasta];
   g("puSubEtiq").textContent=(inv?"Valor de este pedido · ":"Subtotal · ")+num(u)+" alfajores";g("puSub").textContent=pesos(sub);
   if(inv){g("invMonto").textContent=pesos(i.material);const tot=hasta>=5?i.total:sub-parte+i.material;g("invTotal").textContent=pesos(tot);g("invTotEtiq").textContent=hasta>=5?"Total a pagar en este pedido":"Total a pagar hasta acá"}
-  g("finalUnidad").textContent=pesos(Math.round((i.total-(bobIni?i.material-parte:0))/u));g("finalTotal").textContent=pesos(i.total);
+  const fu=pesos(Math.round((i.total-(bobIni?i.material-parte:0))/u)),ft=pesos(i.total);[["finalUnidad",fu],["finalTotal",ft]].forEach(([id,v])=>{const el=g(id);if(el.textContent!==v){el.textContent=v;el.classList.add("cambio");setTimeout(()=>el.classList.remove("cambio"),700)}});
   if(bobIni)g("finalNota").textContent="El total incluye la compra inicial de la bobina impresa ("+pesos(i.material)+"), que rinde para unos "+num(RINDE_BOBINA)+" alfajores. Se paga una sola vez: en tus próximos pedidos usás los envoltorios que quedan reservados a tu nombre. El precio por alfajor es con la bobina prorrateada.";
  }
  new MutationObserver(panel).observe(g("total"),{childList:true,characterData:true,subtree:true});
