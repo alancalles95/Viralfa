@@ -297,6 +297,7 @@ legend+*{clear:both}
 .muestras-box{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(24px,5vw,64px);align-items:center;border:1px solid rgba(200,255,0,.4);border-radius:12px;padding:clamp(26px,5vw,56px);background:radial-gradient(circle at 100% 0,rgba(200,255,0,.1),transparent 55%),var(--card)}
 .precio-m{font-family:"Bebas Neue",Impact,sans-serif;font-size:clamp(4rem,9vw,6rem);line-height:.9;color:var(--lima)}
 .muestras-box .nota{color:var(--muted);margin:8px 0 22px}
+.pago-nota{margin-top:14px;font-size:.88rem;color:var(--muted);max-width:360px}.pago-nota a{color:var(--lima)}
 
 /* faq */
 .faq-grid{display:grid;grid-template-columns:.8fr 1.4fr;gap:clamp(24px,5vw,72px);align-items:start}
@@ -498,7 +499,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
   </form></section>
  <section class="bloque" id="ok" hidden tabindex="-1"><div><p class="eyebrow">Solicitud recibida</p><h3>Tu cotización llegó a VIRALFA.</h3><p id="referencia"></p></div>
   <div><div class="botonera"><button class="btn negro" id="pdf">Guardar PDF</button><button class="btn borde" id="otro">Armar otro pedido</button></div>
-   <div class="siguiente"><p><b>¿Querés probarlo mientras tanto?</b> Pedí el pack degustación por $20.000. Se descuenta de tu primer pedido.</p><a class="btn btn-wa" href="https://wa.me/542926468237?text=Hola%2C%20acabo%20de%20cotizar%20en%20la%20web%20y%20quiero%20pedir%20el%20pack%20degustaci%C3%B3n%20(%2420.000%2C%20se%20descuenta%20del%20primer%20pedido)." target="_blank" rel="noopener" data-wa="muestras-ok">Pedir pack degustación</a></div>
+   <div class="siguiente"><p><b>¿Querés probarlo mientras tanto?</b> Comprá el pack degustación por $20.000. Se descuenta de tu primer pedido.</p><a class="btn negro" href="https://mpago.la/29q1Evu" target="_blank" rel="noopener" data-mp="muestras-ok">Comprar con Mercado Pago</a><p style="margin-top:10px!important;font-size:.88rem">Después <a href="https://wa.me/542926468237?text=Hola%2C%20ya%20pagu%C3%A9%20el%20pack%20degustaci%C3%B3n%20por%20Mercado%20Pago.%20Mi%20nombre%2C%20marca%20y%20direcci%C3%B3n%20para%20el%20env%C3%ADo%3A%20" target="_blank" rel="noopener" data-wa="muestras-ok-pagado">avisanos por WhatsApp</a> con tu dirección para el envío.</p></div>
   </div></section>
 </div></section>
 
@@ -528,7 +529,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
 
 <section class="sec" id="muestras"><div class="wrap"><div class="muestras-box">
  <div><p class="eyebrow">Pack degustación</p><h2>¿Querés probarlo<br>antes?</h2><p class="lead" style="margin-top:16px">Probá calidad, sabor y terminación con tus propias manos antes de decidir tu pedido.</p></div>
- <div><div class="precio-m">$20.000</div><p class="nota">Se descuenta de tu primer pedido.</p><a class="btn btn-lima" href="https://wa.me/542926468237?text=Hola%2C%20quiero%20pedir%20el%20pack%20degustaci%C3%B3n%20de%20VIRALFA%20(%2420.000%2C%20se%20descuenta%20del%20primer%20pedido).%20Mi%20nombre%20y%20marca%3A%20" target="_blank" rel="noopener" data-wa="muestras">Pedir pack degustación</a></div>
+ <div><div class="precio-m">$20.000</div><p class="nota">Se descuenta de tu primer pedido.</p><a class="btn btn-lima" href="https://mpago.la/29q1Evu" target="_blank" rel="noopener" data-mp="muestras">Comprar con Mercado Pago</a><p class="pago-nota">Pagás online con tarjeta, débito o dinero en cuenta. Después <a href="https://wa.me/542926468237?text=Hola%2C%20ya%20pagu%C3%A9%20el%20pack%20degustaci%C3%B3n%20por%20Mercado%20Pago.%20Mi%20nombre%2C%20marca%20y%20direcci%C3%B3n%20para%20el%20env%C3%ADo%3A%20" target="_blank" rel="noopener" data-wa="muestras-pagado">escribinos por WhatsApp</a> con tu nombre y dirección para coordinar el envío.</p></div>
 </div></div></section>
 
 <section class="sec faq" id="preguntas"><div class="wrap faq-grid">
@@ -539,7 +540,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
   <details><summary>¿Cuánto tarda?</summary><p>15 días con etiqueta y 30 días con envoltorio impreso o display impreso, desde que aprobás los diseños finales. El tiempo de envío depende del destino.</p></details>
   <details><summary>¿Cómo se paga?</summary><p>50 % de anticipo al confirmar y el saldo antes del despacho. Los precios del cotizador son finales, en pesos y con IVA incluido. El flete se cotiza aparte.</p></details>
   <details><summary>¿Hacen envíos a todo el país?</summary><p>Sí. Coordinamos el envío a cualquier localidad de Argentina y te pasamos el costo según destino y volumen.</p></details>
-  <details><summary>¿Puedo probar el alfajor antes de pedir?</summary><p>Sí, con el pack degustación ($20.000, se descuenta de tu primer pedido). Y cuando confirmás, antes de fabricar el lote completo aprobás una muestra con tu marca.</p></details>
+  <details><summary>¿Puedo probar el alfajor antes de pedir?</summary><p>Sí, con el pack degustación: lo comprás online con Mercado Pago ($20.000) y se descuenta de tu primer pedido. Y cuando confirmás, antes de fabricar el lote completo aprobás una muestra con tu marca.</p></details>
   <details><summary>¿Etiqueta o envoltorio impreso?</summary><p>La etiqueta (redonda o rectangular) se imprime y se pega sobre un envoltorio liso: es la opción más rápida para arrancar. El envoltorio impreso (bobina) lleva tu diseño en todo el paquete, frente y dorso a full color, y conviene si vas a repetir pedidos: en el primer pedido comprás una bobina que rinde unos 30.000 envoltorios. El cotizador te muestra esa inversión aparte y el precio por alfajor con la bobina prorrateada. En los dos casos el alfajor es el mismo.</p></details>
   <details><summary>¿Qué pasa si quiero repetir el pedido?</summary><p>Con envoltorio impreso, tu diseño y los envases que sobran quedan reservados a tu nombre, así no volvés a pagar el film. Con etiqueta, las imprimimos de nuevo para cada pedido.</p></details>
  </div>
@@ -894,6 +895,8 @@ const VF_MAIL_KEY="f22d6233-016d-48c9-a686-fdae1fc9bee5";
    fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(cuerpo),keepalive:true}).catch(()=>{});
   },500);
  });
+ // Clic en el pack degustación (Mercado Pago)
+ document.addEventListener("click",e=>{const a=e.target.closest("a[data-mp]");if(a)ev("InitiateCheckout",{content_name:"pack degustacion",value:20000,currency:"ARS"})});
  // Clicks a WhatsApp
  document.addEventListener("click",e=>{const a=e.target.closest("a[href*='wa.me']");if(a)ev("Contact",{content_name:a.dataset.wa||"whatsapp"})});
  // Barra mobile: se esconde cuando el cotizador está en pantalla
