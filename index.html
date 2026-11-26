@@ -101,7 +101,7 @@ h1 .l2{color:var(--lima);display:block}h1 .l3{display:block;color:transparent;-w
 .op{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:start;padding:18px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
 .op .ic{height:56px;display:grid;place-items:center;border-radius:6px;background:#0f0f0f;border:1px solid var(--line)}
 .op .ic i{display:block;border:2px solid var(--lima)}
-.ic .c{width:26px;height:26px;border-radius:50%}.ic .r{width:34px;height:16px}.ic .b{width:34px;height:20px;background:repeating-linear-gradient(90deg,var(--lima) 0 3px,transparent 3px 7px);border:0}
+.op .ic i{position:relative;width:38px;height:22px;border-left-style:dashed;border-right-style:dashed;border-radius:2px}.op .ic i:after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--lima)}.ic .c:after{width:10px;height:10px;border-radius:50%}.ic .r:after{width:24px;height:7px}.ic .b{background:repeating-linear-gradient(135deg,var(--lima) 0 3px,transparent 3px 6px)}.ic .b:after{display:none}
 .op h3{font-size:1.06rem;font-weight:700}.op p{color:var(--muted);font-size:.93rem;margin-top:3px}
 .op .tag{display:inline-block;margin-top:8px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lima);border:1px solid rgba(200,255,0,.35);border-radius:3px;padding:2px 7px}
 .cajas{margin-top:16px;color:var(--muted);font-size:.93rem}
@@ -134,9 +134,12 @@ legend+*{clear:both}
 .envChoices label:has(input:checked){border:2px solid #2c4120;padding:9px;background:#eef7d6}
 .envChoices input{position:absolute;right:6px;top:6px;accent-color:#38532b}
 .envChoices small{margin:2px 0!important}
-.forma{display:block;border:2px solid #4d653a;height:19px;width:19px;margin:3px 0 11px}
-.circulo{border-radius:50%}.rect{width:34px}
-.rollo{width:32px;transform:skew(-13deg);background:repeating-linear-gradient(90deg,transparent 0 8px,#9daa8c 9px 10px)}
+.ayudaForm{margin:-6px 0 4px;color:#4d5945;font-size:.93rem}
+.paq{display:block;position:relative;width:48px;height:28px;margin:2px 0 10px;border:2px solid #4d653a;border-left-style:dashed;border-right-style:dashed;border-radius:2px;background:#fff}
+.paq:after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#4d653a}
+.p-circ:after{width:14px;height:14px;border-radius:50%}
+.p-rect:after{width:30px;height:10px}
+.p-full{background:repeating-linear-gradient(135deg,#c8ff00 0 4px,#4d653a 4px 8px)}.p-full:after{display:none}
 #grupoColor{max-width:330px}
 .ayudaEnvase{color:#4d5945;font-size:.94rem;line-height:1.45;margin:12px 0}
 .ticket{background:#fff;border:1px solid #bcc4af;border-radius:10px;overflow:hidden;position:sticky;top:84px;box-shadow:0 18px 40px -24px rgba(0,0,0,.35)}
@@ -240,7 +243,11 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
 @media(max-width:520px){
  .pasos4{grid-template-columns:1fr}
  .stat{padding:18px 16px}.stat b{font-size:1.9rem}
- .envChoices{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.envChoices label{padding:8px 7px}.envChoices label:has(input:checked){padding:7px 6px}.envChoices strong{font-size:.84rem}
+ .envChoices{grid-template-columns:1fr;gap:8px}
+ #cotizar .envChoices label{display:grid;grid-template-columns:52px 1fr;column-gap:12px;align-items:center;padding:12px 34px 12px 12px}
+ #cotizar .envChoices label:has(input:checked){padding:11px 33px 11px 11px}
+ .envChoices .paq{grid-row:span 2;margin:0}
+ .envChoices input{top:50%!important;transform:translateY(-50%)}
  .ctas .btn{flex:1 1 100%}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.marquee div{animation:none}.btn{transition:none}}
@@ -299,9 +306,9 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
    <div class="opciones">
     <div class="op"><div class="ic"><i class="c"></i></div><div><h3>Etiqueta redonda · Ø 6 cm</h3><p>Envoltorio liso negro, dorado o plateado con tu etiqueta al frente.</p><span class="tag">Listo en 15 días</span></div></div>
     <div class="op"><div class="ic"><i class="r"></i></div><div><h3>Etiqueta rectangular · 5 × 12 cm</h3><p>La etiqueta va de frente a dorso, con más lugar para tu marca y tus textos.</p><span class="tag">Listo en 15 días</span></div></div>
-    <div class="op"><div class="ic"><i class="b"></i></div><div><h3>Bobina impresa full color</h3><p>Tu diseño en todo el envoltorio. Los envases que sobran quedan reservados para tus próximos pedidos.</p><span class="tag">Listo en 30 días</span></div></div>
+    <div class="op"><div class="ic"><i class="b"></i></div><div><h3>Envoltorio impreso full color</h3><p>Tu diseño impreso en todo el paquete, frente y dorso. Los envases que sobran quedan reservados para tus próximos pedidos.</p><span class="tag">Listo en 30 días</span></div></div>
    </div>
-   <p class="cajas">Sumá cajas display ×12 impresas o corrugadas ×18. <a href="https://viralfa-marcas.arcticghat1.chatgpt.site/ficha-cliente.pdf" target="_blank" rel="noopener">Descargar planos de etiqueta (PDF)</a></p>
+   <p class="cajas">El alfajor es el mismo en las tres opciones: lo que cambia es cómo va tu marca en el paquete. Sumá cajas display ×12 impresas o corrugadas ×18. <a href="https://viralfa-marcas.arcticghat1.chatgpt.site/ficha-cliente.pdf" target="_blank" rel="noopener">Descargar planos de etiqueta (PDF)</a></p>
   </div>
  </div>
 </div></section>
@@ -314,8 +321,9 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
  <div class="layout">
   <div class="config" id="elecciones">
    <fieldset><legend>Cantidad de alfajores</legend><div class="rapidos" id="rapidos"></div><label class="enlinea">Cantidad exacta <input type="number" id="unidades" value="500" min="500" max="1000000" inputmode="numeric" required></label><small id="escala"></small></fieldset>
-   <fieldset><legend>Alfajor y envase</legend><div class="campos"><label>Variedad<select id="sabor"></select></label><label>Peso por alfajor<select id="gramos"></select></label></div><p role="status" id="notaCatalogo"></p><button class="btn borde" type="button" id="reintentar" hidden>Volver a cargar productos</button>
-    <div class="envChoices" aria-label="Envase" role="radiogroup"><label><input type="radio" name="envase" value="redonda" checked><i class="forma circulo"></i><strong>Redonda</strong><small>Ø 6 cm</small></label><label><input type="radio" name="envase" value="rectangular"><i class="forma rect"></i><strong>Rectangular</strong><small>5 × 12 cm</small></label><label><input type="radio" name="envase" value="bobina"><i class="forma rollo"></i><strong>Bobina digital</strong><small>Full color</small></label></div>
+   <fieldset><legend>El alfajor</legend><div class="campos"><label>Variedad<select id="sabor"></select></label><label>Peso por alfajor<select id="gramos"></select></label></div><p role="status" id="notaCatalogo"></p><button class="btn borde" type="button" id="reintentar" hidden>Volver a cargar productos</button></fieldset>
+   <fieldset><legend>Tu marca en el envoltorio</legend><p class="ayudaForm">Elegí cómo va tu marca en el paquete. Esto no cambia la forma del alfajor.</p>
+    <div class="envChoices" aria-label="Cómo va tu marca en el envoltorio" role="radiogroup"><label><input type="radio" name="envase" value="redonda" checked><i class="paq p-circ"></i><strong>Etiqueta redonda</strong><small>Ø 6 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="rectangular"><i class="paq p-rect"></i><strong>Etiqueta rectangular</strong><small>5 × 12 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="bobina"><i class="paq p-full"></i><strong>Envoltorio impreso</strong><small>Tu diseño full color en todo el paquete</small></label></div>
     <p id="tipoEnvase" class="ayudaEnvase"></p>
     <div id="grupoColor"><label for="color">Color del envoltorio liso</label><select id="color"></select></div>
    </fieldset>
@@ -376,12 +384,12 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
  <div>
   <details><summary>¿Cuál es el pedido mínimo?</summary><p>500 unidades. En el cotizador ves cómo baja el precio por alfajor a medida que subís de escala.</p></details>
   <details><summary>¿Puedo mandar mi propio diseño?</summary><p>Sí. Si ya tenés logo e identidad de marca, nos los mandás y los aplicamos. Si no tenés diseño, lo armamos con vos en el primer pedido: el costo aparece en el cotizador.</p></details>
-  <details><summary>¿Cuánto tarda?</summary><p>15 días con etiqueta y 30 días con bobina impresa o display impreso, desde que aprobás los diseños finales. El tiempo de envío depende del destino.</p></details>
+  <details><summary>¿Cuánto tarda?</summary><p>15 días con etiqueta y 30 días con envoltorio impreso o display impreso, desde que aprobás los diseños finales. El tiempo de envío depende del destino.</p></details>
   <details><summary>¿Cómo se paga?</summary><p>50 % de anticipo al confirmar y el saldo antes del despacho. Los precios del cotizador son finales, en pesos y con IVA incluido. El flete se cotiza aparte.</p></details>
   <details><summary>¿Hacen envíos a todo el país?</summary><p>Sí. Coordinamos el envío a cualquier localidad de Argentina y te pasamos el costo según destino y volumen.</p></details>
   <details><summary>¿Puedo probar el alfajor antes de pedir?</summary><p>Sí, con el pack degustación ($20.000, se descuenta de tu primer pedido). Y cuando confirmás, antes de fabricar el lote completo aprobás una muestra con tu marca.</p></details>
-  <details><summary>¿Etiqueta o bobina impresa?</summary><p>La etiqueta (redonda o rectangular) se imprime y se pega sobre un envoltorio liso: es la opción más rápida para arrancar. La bobina imprime tu diseño en todo el envoltorio, con frente y dorso a full color, y conviene si vas a repetir pedidos.</p></details>
-  <details><summary>¿Qué pasa si quiero repetir el pedido?</summary><p>Con bobina, tu diseño y los envases que sobran quedan reservados a tu nombre, así no volvés a pagar el film. Con etiqueta, las imprimimos de nuevo para cada pedido.</p></details>
+  <details><summary>¿Etiqueta o envoltorio impreso?</summary><p>La etiqueta (redonda o rectangular) se imprime y se pega sobre un envoltorio liso: es la opción más rápida para arrancar. El envoltorio impreso (bobina) lleva tu diseño en todo el paquete, frente y dorso a full color, y conviene si vas a repetir pedidos. En los dos casos el alfajor es el mismo.</p></details>
+  <details><summary>¿Qué pasa si quiero repetir el pedido?</summary><p>Con envoltorio impreso, tu diseño y los envases que sobran quedan reservados a tu nombre, así no volvés a pagar el film. Con etiqueta, las imprimimos de nuevo para cada pedido.</p></details>
  </div>
 </div></section>
 
@@ -406,7 +414,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
 <noscript>Activá JavaScript para cotizar o escribinos por WhatsApp al 2926 468237.</noscript>
 
 <script>
-const envases={"redonda":"Etiqueta redonda Ø 6 cm","rectangular":"Etiqueta rectangular 5 × 12 cm","bobina":"Bobina con impresión digital full color"};
+const envases={"redonda":"Etiqueta redonda Ø 6 cm","rectangular":"Etiqueta rectangular 5 × 12 cm","bobina":"Envoltorio impreso full color"};
 const cajas={"ninguna":"Sin caja de presentación","displayImpresa":"Display ×12 · impreso","cartonLisa":"Corrugado ×18 · liso","cartonImpresa":"Corrugado ×18 · impreso"};
 const artes={"necesito":"Primer pedido · necesito diseño","propio":"Primer pedido · envío mi diseño","reposicion":"Reposición con el mismo diseño"};
 const escalas=[500,1000,2000,3000];
@@ -508,6 +516,8 @@ $("pdf").onclick=()=>window.print();$("otro").onclick=()=>{location.hash="cotiza
 <script>
 /* Medición para anuncios (Meta Pixel). Pegá tu ID de píxel entre las comillas para activarlo. */
 const VF_PIXEL_ID="";
+/* Aviso por mail de cada cotización. Pegá tu access key de web3forms.com entre las comillas. */
+const VF_MAIL_KEY="f22d6233-016d-48c9-a686-fdae1fc9bee5";
 (function(){
  const ev=(name,params,custom)=>{if(window.fbq)fbq(custom?"trackCustom":"track",name,params||{})};
  if(VF_PIXEL_ID){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init",VF_PIXEL_ID);fbq("track","PageView");}
@@ -519,6 +529,32 @@ const VF_PIXEL_ID="";
  // Envió la cotización: Lead (con el total en pesos)
  const ok=document.getElementById("ok");
  new MutationObserver(()=>{if(!ok.hidden&&!ok.dataset.medido){ok.dataset.medido="1";const n=Number((document.getElementById("total").textContent||"").replace(/[^\d,]/g,"").replace(",","."));ev("Lead",n?{value:n,currency:"ARS"}:{})}}).observe(ok,{attributes:true,attributeFilter:["hidden"]});
+ // Aviso por mail de cada cotización enviada (Web3Forms). Si el sistema de cotizaciones falla, igual te llega el mail.
+ const datos=document.getElementById("datos"),waError=document.getElementById("waError");
+ let ultimaFirma="";
+ datos.addEventListener("submit",()=>{
+  if(!VF_MAIL_KEY||datos.elements.sitio.value)return;
+  const f=datos.elements,firma=[f.nombre.value,f.marca.value,f.tel.value,f.email.value,document.getElementById("descripcion").textContent].join("|");
+  if(firma===ultimaFirma)return;
+  let vueltas=0;const espera=setInterval(()=>{
+   vueltas++;const llego=!ok.hidden,fallo=!waError.hidden;
+   if(!llego&&!fallo&&vueltas<40)return;
+   clearInterval(espera);if(!llego&&!fallo)return;
+   ultimaFirma=firma;
+   const tel=f.tel.value.trim();let n=tel.replace(/\D/g,"").replace(/^54/,"").replace(/^9/,"").replace(/^0/,"");if(n.length===12)for(const a of [2,3,4])if(n.slice(a,a+2)==="15"){n=n.slice(0,a)+n.slice(a+2);break}const wa=n.length===10?"https://wa.me/549"+n:"";
+   const total=document.getElementById("total").textContent.trim(),marca=f.marca.value.trim();
+   const cuerpo={access_key:VF_MAIL_KEY,subject:"[VIRALFA] "+(llego?"Nueva cotización":"⚠ Cotización NO registrada en el panel")+" · "+marca+" · "+total,from_name:"Web VIRALFA",
+    "Estado":llego?"Registrada en el sistema":"El sistema no la registró: contactalo igual",
+    "Referencia":llego?(document.getElementById("referencia").textContent.split(" · ")[0]):"-",
+    "Nombre":f.nombre.value.trim(),"Marca / proyecto":marca,"Localidad":f.localidad.value.trim(),
+    "WhatsApp":tel||"-","Abrir chat":wa||"(revisar el número)","Email":f.email.value.trim()||"-","Comentario":f.nota.value.trim()||"-",
+    "Pedido":document.getElementById("descripcion").textContent.trim(),
+    "Diseño":document.getElementById("arte").selectedOptions[0]?.text||"-",
+    "Total sin flete":total,"Producción":document.getElementById("dias").textContent.trim(),botcheck:false};
+   if(f.email.value.trim())cuerpo.replyto=f.email.value.trim();
+   fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(cuerpo),keepalive:true}).catch(()=>{});
+  },500);
+ });
  // Clicks a WhatsApp
  document.addEventListener("click",e=>{const a=e.target.closest("a[href*='wa.me']");if(a)ev("Contact",{content_name:a.dataset.wa||"whatsapp"})});
  // Barra mobile: se esconde cuando el cotizador está en pantalla
