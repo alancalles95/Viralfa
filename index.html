@@ -482,7 +482,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
     <div class="pu"><span id="puEtiqueta">Precio por alfajor</span><strong id="puValor">—</strong><small id="puNota">Calculando…</small></div>
     <ul class="pu-lista" id="puLista"></ul>
     <div class="pu-sub"><span id="puSubEtiq">Subtotal</span><b id="puSub">—</b></div>
-    <div class="pu-inv" id="puInv" hidden><b>Inversión inicial en envoltorio</b><div class="fila-inv"><span>Bobina impresa · rinde ~30.000 alfajores</span><b id="invMonto">—</b></div><p>Se paga una sola vez, en el primer pedido. Los envoltorios que sobran quedan reservados a tu nombre para tus próximos pedidos.</p><div class="fila-inv tot"><span id="invTotEtiq">Total a pagar en este pedido</span><b id="invTotal">—</b></div></div>
+    <div class="pu-inv" id="puInv" hidden><b>Inversión inicial en envoltorio</b><div class="fila-inv"><span id="invEtiq">Bobina impresa · rinde ~30.000 alfajores</span><b id="invMonto">—</b></div><p id="invTexto">Se paga una sola vez, en el primer pedido. Los envoltorios que sobran quedan reservados a tu nombre para tus próximos pedidos.</p><div class="fila-inv tot"><span id="invTotEtiq">Total a pagar en este pedido</span><b id="invTotal">—</b></div></div>
     <div id="plazo" aria-live="polite"><strong id="dias"></strong><span id="razonPlazo"></span><small>Desde la aprobación de los diseños finales. El envío a tu localidad se coordina aparte.</small></div>
     <details class="detalle"><summary>Ver detalle completo</summary><p id="descripcion"></p><p id="notaBobina" hidden></p><div id="lineas"></div></details>
     <p id="aviso" role="status">Calculando…</p></div>
@@ -828,7 +828,8 @@ function vfPaquete(env, color, uid){
   const r=ultimo,u=Number(g("unidades").value)||0,p=getP(),lista=g("puLista"),val=g("puValor");
   const hasta=Math.max(2,Math.min(paso,5)),i=r&&r.importes;
   const bobIni=!!(i&&p.envase==="bobina"&&(i.material||0)>0);
-  const parte=bobIni?Math.round(i.material*Math.min(u,RINDE_BOBINA)/RINDE_BOBINA):0;
+  const rinde=(r&&r.bobina&&Number(r.bobina.capacidad))||RINDE_BOBINA,restan=r&&r.bobina&&Number(r.bobina.restan);
+  const parte=bobIni?Math.round(i.material*Math.min(u,rinde)/rinde):0;
   const filas=[[2,"Alfajor"],[3,p.envase==="bobina"?(bobIni?"Envoltorio impreso (bobina prorrateada)":"Envoltorio impreso"):"Envoltorio y etiqueta"],[4,"Cajas"],[5,"Diseño"]];
   const montos=i?{2:i.alfajores||0,3:p.envase==="bobina"?(bobIni?parte:(i.material||0))+(i.mano||0):(i.envase||0),4:r.cantCajas?(i.cajasTotal||0):0,5:p.arte==="necesito"?(i.diseno||0):0}:{};
   lista.replaceChildren();let sub=0;
@@ -845,11 +846,11 @@ function vfPaquete(env, color, uid){
   val.textContent=pu;if(pu!==ultimoValor){val.classList.add("cambio");setTimeout(()=>val.classList.remove("cambio"),700);ultimoValor=pu}
   g("puEtiqueta").textContent=hasta>=5?"Precio final por alfajor":"Precio por alfajor";
   const falta=["","","Faltan envase, cajas y diseño.","Faltan cajas y diseño.","Falta el diseño.",""][hasta];
-  g("puNota").textContent=inv?("Con la bobina prorrateada en "+num(RINDE_BOBINA)+" alfajores. "+(falta||"Todo incluido, con IVA. Sin flete.")):["","","Alfajor sin envase. Faltan envase, cajas y diseño.","Alfajor envasado con tu marca. Faltan cajas y diseño.","Alfajor envasado con cajas. Falta el diseño.","Todo incluido, con IVA. Sin flete."][hasta];
+  g("puNota").textContent=inv?("Con la bobina prorrateada en "+num(rinde)+" alfajores. "+(falta||"Todo incluido, con IVA. Sin flete.")):["","","Alfajor sin envase. Faltan envase, cajas y diseño.","Alfajor envasado con tu marca. Faltan cajas y diseño.","Alfajor envasado con cajas. Falta el diseño.","Todo incluido, con IVA. Sin flete."][hasta];
   g("puSubEtiq").textContent=(inv?"Valor de este pedido · ":"Subtotal · ")+num(u)+" alfajores";g("puSub").textContent=pesos(sub);
-  if(inv){g("invMonto").textContent=pesos(i.material);const tot=hasta>=5?i.total:sub-parte+i.material;g("invTotal").textContent=pesos(tot);g("invTotEtiq").textContent=hasta>=5?"Total a pagar en este pedido":"Total a pagar hasta acá"}
+  if(inv){g("invEtiq").textContent="Bobina impresa · rinde "+num(rinde)+" alfajores";g("invTexto").textContent="Se paga una sola vez, en el primer pedido."+(restan>0?" Después de este pedido te quedan "+num(restan)+" envoltorios reservados a tu nombre para tus próximos pedidos.":" Los envoltorios que sobran quedan reservados a tu nombre para tus próximos pedidos.");g("invMonto").textContent=pesos(i.material);const tot=hasta>=5?i.total:sub-parte+i.material;g("invTotal").textContent=pesos(tot);g("invTotEtiq").textContent=hasta>=5?"Total a pagar en este pedido":"Total a pagar hasta acá"}
   const fu=pesos(Math.round((i.total-(bobIni?i.material-parte:0))/u)),ft=pesos(i.total);[["finalUnidad",fu],["finalTotal",ft]].forEach(([id,v])=>{const el=g(id);if(el.textContent!==v){el.textContent=v;el.classList.add("cambio");setTimeout(()=>el.classList.remove("cambio"),700)}});
-  if(bobIni)g("finalNota").textContent="El total incluye la compra inicial de la bobina impresa ("+pesos(i.material)+"), que rinde para unos "+num(RINDE_BOBINA)+" alfajores. Se paga una sola vez: en tus próximos pedidos usás los envoltorios que quedan reservados a tu nombre. El precio por alfajor es con la bobina prorrateada.";
+  if(bobIni)g("finalNota").textContent="El total incluye la compra inicial de la bobina impresa ("+pesos(i.material)+"), que rinde para "+num(rinde)+" alfajores. Se paga una sola vez: en tus próximos pedidos usás los envoltorios que quedan reservados a tu nombre. El precio por alfajor es con la bobina prorrateada.";
  }
  new MutationObserver(panel).observe(g("total"),{childList:true,characterData:true,subtree:true});
  ir(1,false);
