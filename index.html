@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b0b0b">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <title>VIRALFA | Alfajores con tu marca desde 500 unidades</title>
 <meta name="description" content="Fabricamos alfajores premium con tu marca desde 500 unidades. Calculá el precio de tu pedido online en 1 minuto. Para influencers, cafeterías, empresas y marcas propias.">
 <meta name="robots" content="index, follow">
@@ -105,6 +109,24 @@ h1 .l2{color:var(--lima);display:block}h1 .l3{display:block;color:transparent;-w
 .op h3{font-size:1.06rem;font-weight:700}.op p{color:var(--muted);font-size:.93rem;margin-top:3px}
 .op .tag{display:inline-block;margin-top:8px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lima);border:1px solid rgba(200,255,0,.35);border-radius:3px;padding:2px 7px}
 .cajas{margin-top:16px;color:var(--muted);font-size:.93rem}
+.viz{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:radial-gradient(circle at 50% 38%,#2b2b28,#0e0e0e 78%)}
+.viz-stage{aspect-ratio:3/2;display:grid;place-items:center;padding:14px}
+.viz-stage svg{width:100%;height:100%}
+.viz-stage img{width:100%;height:100%;object-fit:cover;border-radius:6px}
+.viz-ctrl{padding:14px 18px 16px;border-top:1px solid var(--line);background:#111}
+.viz-colors{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.viz-colors span{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.viz-colors button{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;border:1px solid #3a3a36;background:#1a1a1a;color:var(--txt);font-weight:600;font-size:.88rem}
+.viz-colors button[aria-pressed=true]{border-color:var(--lima);box-shadow:0 0 0 1px var(--lima) inset}
+.sw{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid #555}
+.sw-negro{background:linear-gradient(135deg,#3a3a3a,#050505)}.sw-plateado{background:linear-gradient(135deg,#f5f6f7,#8c9196)}.sw-dorado{background:linear-gradient(135deg,#f7e4a0,#8d6a1b)}
+.viz-nota{margin-top:10px;font-size:.82rem;color:var(--muted)}
+.op[data-env]{cursor:pointer;transition:border-color .15s}.op[data-env]:hover{border-color:#55554d}
+.op[aria-pressed=true]{border-color:var(--lima);box-shadow:0 0 0 1px var(--lima) inset}
+#vizCotizar{margin-top:16px}
+.mini{margin:14px 0 4px;border-radius:10px;background:radial-gradient(circle at 50% 38%,#2e2e2b,#101010 78%);padding:10px 14px 8px;text-align:center}
+.mini svg{display:block;width:100%;max-width:320px;height:auto;margin:auto}
+#cotizar .mini small{color:#a1a198;margin:2px 0 0;font-size:.74rem}
 .cajas a{color:var(--txt);font-weight:600}
 
 /* cotizador (banda clara) */
@@ -301,14 +323,17 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
  <p class="eyebrow">Presentaciones</p>
  <h2>Así queda<br>tu alfajor.</h2>
  <div class="env-grid">
-  <div class="env-img"><img src="img/packaging.webp" alt="Alfajor con envoltorio impreso full color con marca propia" width="1200" height="800" loading="lazy" decoding="async"></div>
+  <div class="viz"><div class="viz-stage" id="vizStage"></div>
+   <div class="viz-ctrl"><div class="viz-colors" id="vizColors" role="group" aria-label="Color del envoltorio"><span>Envoltorio</span><button type="button" data-color="negro" aria-pressed="true"><i class="sw sw-negro"></i>Negro</button><button type="button" data-color="plateado" aria-pressed="false"><i class="sw sw-plateado"></i>Plateado</button><button type="button" data-color="dorado" aria-pressed="false"><i class="sw sw-dorado"></i>Dorado</button></div>
+   <p class="viz-nota" id="vizNota">Imagen ilustrativa.</p></div></div>
   <div>
    <div class="opciones">
-    <div class="op"><div class="ic"><i class="c"></i></div><div><h3>Etiqueta redonda · Ø 6 cm</h3><p>Envoltorio liso negro, dorado o plateado con tu etiqueta al frente.</p><span class="tag">Listo en 15 días</span></div></div>
-    <div class="op"><div class="ic"><i class="r"></i></div><div><h3>Etiqueta rectangular · 5 × 12 cm</h3><p>La etiqueta va de frente a dorso, con más lugar para tu marca y tus textos.</p><span class="tag">Listo en 15 días</span></div></div>
-    <div class="op"><div class="ic"><i class="b"></i></div><div><h3>Envoltorio impreso full color</h3><p>Tu diseño impreso en todo el paquete, frente y dorso. Los envases que sobran quedan reservados para tus próximos pedidos.</p><span class="tag">Listo en 30 días</span></div></div>
+    <div class="op" data-env="redonda" role="button" tabindex="0" aria-pressed="true"><div class="ic"><i class="c"></i></div><div><h3>Etiqueta redonda · Ø 6 cm</h3><p>Envoltorio liso negro, dorado o plateado con tu etiqueta al frente.</p><span class="tag">Listo en 15 días</span></div></div>
+    <div class="op" data-env="rectangular" role="button" tabindex="0" aria-pressed="false"><div class="ic"><i class="r"></i></div><div><h3>Etiqueta rectangular · 5 × 12 cm</h3><p>La etiqueta va de frente a dorso, con más lugar para tu marca y tus textos.</p><span class="tag">Listo en 15 días</span></div></div>
+    <div class="op" data-env="bobina" role="button" tabindex="0" aria-pressed="false"><div class="ic"><i class="b"></i></div><div><h3>Envoltorio impreso full color</h3><p>Tu diseño impreso en todo el paquete, frente y dorso. Los envases que sobran quedan reservados para tus próximos pedidos.</p><span class="tag">Listo en 30 días</span></div></div>
    </div>
-   <p class="cajas">El alfajor es el mismo en las tres opciones: lo que cambia es cómo va tu marca en el paquete. Sumá cajas display ×12 impresas o corrugadas ×18. <a href="https://viralfa-marcas.arcticghat1.chatgpt.site/ficha-cliente.pdf" target="_blank" rel="noopener">Descargar planos de etiqueta (PDF)</a></p>
+   <a href="#cotizar" class="btn btn-lima" id="vizCotizar">Cotizar con esta opción →</a>
+   <p class="cajas">Tocá cada opción para verla. El alfajor es el mismo en las tres opciones: lo que cambia es cómo va tu marca en el paquete. Sumá cajas display ×12 impresas o corrugadas ×18. <a href="https://viralfa-marcas.arcticghat1.chatgpt.site/ficha-cliente.pdf" target="_blank" rel="noopener">Descargar planos de etiqueta (PDF)</a></p>
   </div>
  </div>
 </div></section>
@@ -324,6 +349,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
    <fieldset><legend>El alfajor</legend><div class="campos"><label>Variedad<select id="sabor"></select></label><label>Peso por alfajor<select id="gramos"></select></label></div><p role="status" id="notaCatalogo"></p><button class="btn borde" type="button" id="reintentar" hidden>Volver a cargar productos</button></fieldset>
    <fieldset><legend>Tu marca en el envoltorio</legend><p class="ayudaForm">Elegí cómo va tu marca en el paquete. Esto no cambia la forma del alfajor.</p>
     <div class="envChoices" aria-label="Cómo va tu marca en el envoltorio" role="radiogroup"><label><input type="radio" name="envase" value="redonda" checked><i class="paq p-circ"></i><strong>Etiqueta redonda</strong><small>Ø 6 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="rectangular"><i class="paq p-rect"></i><strong>Etiqueta rectangular</strong><small>5 × 12 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="bobina"><i class="paq p-full"></i><strong>Envoltorio impreso</strong><small>Tu diseño full color en todo el paquete</small></label></div>
+    <div class="mini"><div id="miniPaq"></div><small>Vista ilustrativa de tu envase</small></div>
     <p id="tipoEnvase" class="ayudaEnvase"></p>
     <div id="grupoColor"><label for="color">Color del envoltorio liso</label><select id="color"></select></div>
    </fieldset>
@@ -514,6 +540,88 @@ $("datos").onsubmit=async e=>{
 $("pdf").onclick=()=>window.print();$("otro").onclick=()=>{location.hash="cotizar";location.reload()};cargarCatalogo();
 </script>
 <script>
+/* Simulación del alfajor envasado: envoltorio liso (negro, plateado, dorado) con etiqueta redonda o rectangular, o envoltorio impreso full color. */
+function vfPaquete(env, color, uid){
+ const P={negro:["#060606","#2a2a2a","#101010","#363636","#070707"],
+  plateado:["#7d8288","#eceef0","#a9aeb3","#fafbfc","#8c9196"],
+  dorado:["#7a5a14","#efcd72","#ad8427","#f7e4a0","#8d6a1b"]};
+ const c=P[color]||P.negro, g="vf"+uid, impreso=env==="bobina";
+ const stops=(a)=>a.map((h,i)=>`<stop offset="${(i/(a.length-1)).toFixed(2)}" stop-color="${h}"/>`).join("");
+ let zz="";for(let y=44,k=0;y<=276;y+=8,k++)zz+=`${k%2?28:21},${y} `;
+ let zzR="";for(let y=44,k=0;y<=276;y+=8,k++)zzR+=`${k%2?392:399},${y} `;
+ const cuerpo=`<path d="M52 44 L${zz}52 276 Z"/><rect x="44" y="34" width="332" height="252" rx="24"/><path d="M368 44 L${zzR}368 276 Z"/>`;
+ let s=`<svg viewBox="0 0 420 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simulación de alfajor envasado">
+ <defs>
+  <linearGradient id="${g}b" x1="0" y1="0" x2="1" y2="1">${impreso?'<stop offset="0" stop-color="#c8ff00"/><stop offset=".55" stop-color="#7cf03a"/><stop offset="1" stop-color="#1c1c1c"/>':stops(c)}</linearGradient>
+  <radialGradient id="${g}bu" cx=".4" cy=".36" r=".65"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".32"/></radialGradient>
+  <linearGradient id="${g}gl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="${g}wr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset=".1" stop-color="#000" stop-opacity="0"/><stop offset=".9" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+  <pattern id="${g}cr" width="4" height="10" patternUnits="userSpaceOnUse"><path d="M1 0V10" stroke="#000" stroke-opacity=".28" stroke-width="1.2"/></pattern>
+  <pattern id="${g}st" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><rect width="26" height="26" fill="none"/><rect width="9" height="26" fill="#0b0b0b" opacity=".14"/></pattern>
+  <clipPath id="${g}cp">${cuerpo}</clipPath>
+  <filter id="${g}sh" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
+  <filter id="${g}ls" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-opacity=".35"/></filter>
+ </defs>
+ <ellipse cx="210" cy="306" rx="176" ry="12" fill="#000" opacity=".55" filter="url(#${g}sh)"/>
+ <g clip-path="url(#${g}cp)">
+  <rect x="0" y="0" width="420" height="330" fill="url(#${g}b)"/>`;
+ if(impreso){
+  s+=`<rect x="0" y="0" width="420" height="330" fill="url(#${g}st)"/>
+  <circle cx="330" cy="70" r="70" fill="#7b2cff" opacity=".85"/><circle cx="92" cy="268" r="58" fill="#ff3d81" opacity=".8"/>
+  <text x="210" y="168" text-anchor="middle" font-family="'Bebas Neue',Impact,sans-serif" font-size="92" fill="#0b0b0b" stroke="#fff" stroke-width="3" paint-order="stroke" letter-spacing="2">TU MARCA</text>
+  <text x="210" y="206" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-weight="700" font-size="15" fill="#0b0b0b" letter-spacing="3">ALFAJOR DE DULCE DE LECHE</text>
+  <text x="300" y="262" font-family="Outfit,Arial,sans-serif" font-weight="700" font-size="14" fill="#fff">55 g</text>`;
+ }
+ s+=`<ellipse cx="210" cy="160" rx="132" ry="114" fill="url(#${g}bu)"/>
+  <ellipse cx="210" cy="160" rx="132" ry="114" fill="none" stroke="#000" stroke-opacity="${impreso?".05":".09"}" stroke-width="7"/>
+  <rect x="0" y="0" width="56" height="330" fill="url(#${g}cr)"/><rect x="364" y="0" width="56" height="330" fill="url(#${g}cr)"/>
+  <rect x="0" y="0" width="54" height="330" fill="#000" opacity=".12"/><rect x="366" y="0" width="54" height="330" fill="#000" opacity=".12"/>`;
+ if(env==="redonda"){
+  s+=`<g filter="url(#${g}ls)"><circle cx="210" cy="160" r="84" fill="#fff"/></g>
+  <circle cx="210" cy="160" r="75" fill="none" stroke="#0b0b0b" stroke-width="1.6"/>
+  <text x="210" y="160" text-anchor="middle" font-family="'Bebas Neue',Impact,sans-serif" font-size="40" fill="#0b0b0b" letter-spacing=".5">TU MARCA</text>
+  <text x="210" y="181" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-weight="600" font-size="9.5" fill="#333" letter-spacing="1.4">DULCE DE LECHE</text>
+  <text x="210" y="200" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-size="9.5" fill="#555">55 g</text>`;
+ } else if(env==="rectangular"){
+  s+=`<g filter="url(#${g}ls)"><rect x="140" y="20" width="140" height="290" fill="#fff"/></g>
+  <rect x="140" y="20" width="140" height="290" fill="url(#${g}wr)"/>
+  <text x="210" y="138" text-anchor="middle" font-family="'Bebas Neue',Impact,sans-serif" font-size="50" fill="#0b0b0b">TU</text>
+  <text x="210" y="182" text-anchor="middle" font-family="'Bebas Neue',Impact,sans-serif" font-size="50" fill="#0b0b0b">MARCA</text>
+  <line x1="168" y1="198" x2="252" y2="198" stroke="#0b0b0b" stroke-width="1.4"/>
+  <text x="210" y="216" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-weight="600" font-size="9.5" fill="#333" letter-spacing="1">ALFAJOR DE</text>
+  <text x="210" y="229" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-weight="600" font-size="9.5" fill="#333" letter-spacing="1">DULCE DE LECHE</text>
+  <text x="210" y="250" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-size="9.5" fill="#555">55 g</text>`;
+ }
+ s+=`<rect x="-40" y="0" width="120" height="330" fill="url(#${g}gl)" transform="rotate(18 210 165) translate(150 0)" opacity=".9"/>
+  <path d="M60 52 Q210 40 360 52" stroke="#fff" stroke-opacity="${color==="negro"||impreso?".18":".45"}" stroke-width="3" fill="none"/>
+ </g>
+ <g fill="none" stroke="#000" stroke-opacity=".35" stroke-width="1.2"><line x1="54" y1="44" x2="54" y2="276"/><line x1="366" y1="44" x2="366" y2="276"/></g>
+ </svg>`;
+ return s;
+}
+/* Visualizador de envases y vista previa en el cotizador */
+(function(){
+ const stage=document.getElementById("vizStage"),ops=[...document.querySelectorAll(".op[data-env]")],box=document.getElementById("vizColors"),cols=[...box.querySelectorAll("button")],nota=document.getElementById("vizNota");
+ let env="redonda",color="negro";
+ const nombres={redonda:"etiqueta redonda Ø 6 cm",rectangular:"etiqueta rectangular 5 × 12 cm"};
+ const pintar=()=>{
+  ops.forEach(o=>o.setAttribute("aria-pressed",String(o.dataset.env===env)));
+  cols.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.color===color)));
+  box.hidden=env==="bobina";
+  stage.innerHTML=env==="bobina"?'<img src="img/packaging.webp" alt="Ejemplo de alfajor con envoltorio impreso full color" width="1200" height="800">':vfPaquete(env,color,"viz");
+  nota.textContent=env==="bobina"?"Ejemplo de diseño impreso en todo el envoltorio, frente y dorso.":"Imagen ilustrativa: "+nombres[env]+" sobre envoltorio "+color+".";
+ };
+ ops.forEach(o=>{const elegir=()=>{env=o.dataset.env;pintar()};o.addEventListener("click",elegir);o.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();elegir()}})});
+ cols.forEach(b=>b.addEventListener("click",()=>{color=b.dataset.color;pintar()}));
+ document.getElementById("vizCotizar").addEventListener("click",()=>{
+  const r=document.querySelector('[name=envase][value="'+env+'"]');if(r&&!r.checked){r.checked=true;r.dispatchEvent(new Event("input",{bubbles:true}))}
+  const sel=document.getElementById("color");if(env!=="bobina"&&sel.value!==color&&[...sel.options].some(o=>o.value===color)){sel.value=color;sel.dispatchEvent(new Event("input",{bubbles:true}))}
+ });
+ pintar();
+ const mini=document.getElementById("miniPaq"),form=document.getElementById("elecciones");
+ const pintarMini=()=>{const e=(document.querySelector("[name=envase]:checked")||{}).value||"redonda";mini.innerHTML=vfPaquete(e,document.getElementById("color").value||"negro","mini")};
+ form.addEventListener("input",pintarMini);form.addEventListener("change",pintarMini);pintarMini();
+})();
 /* Medición para anuncios (Meta Pixel). Pegá tu ID de píxel entre las comillas para activarlo. */
 const VF_PIXEL_ID="";
 /* Aviso por mail de cada cotización. Pegá tu access key de web3forms.com entre las comillas. */
