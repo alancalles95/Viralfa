@@ -119,7 +119,7 @@ h1 .l2{color:var(--lima);display:block}h1 .l3{display:block;color:transparent;-w
 .viz-colors button{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;border:1px solid #3a3a36;background:#1a1a1a;color:var(--txt);font-weight:600;font-size:.88rem}
 .viz-colors button[aria-pressed=true]{border-color:var(--lima);box-shadow:0 0 0 1px var(--lima) inset}
 .sw{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid #555}
-.sw-negro{background:linear-gradient(135deg,#3a3a3a,#050505)}.sw-plateado{background:linear-gradient(135deg,#f5f6f7,#8c9196)}.sw-dorado{background:linear-gradient(135deg,#f7e4a0,#8d6a1b)}
+.sw-negro{background:linear-gradient(135deg,#3a3a3a,#050505)}.sw-plateado{background:linear-gradient(135deg,#f5f6f7,#8c9196)}.sw-dorado{background:linear-gradient(135deg,#f7e4a0,#8d6a1b)}.sw-aluminio{background:conic-gradient(from 20deg,#fff1b8,#a2741a,#f7d97c,#7d560f,#ffe9a3,#b8892a,#fff1b8)}
 .viz-nota{margin-top:10px;font-size:.82rem;color:var(--muted)}
 .op[data-env]{cursor:pointer;transition:border-color .15s}.op[data-env]:hover{border-color:#55554d}
 .op[aria-pressed=true]{border-color:var(--lima);box-shadow:0 0 0 1px var(--lima) inset}
@@ -178,13 +178,20 @@ h1 .l2{color:var(--lima);display:block}h1 .l3{display:block;color:transparent;-w
 .pu-lista li.pend{color:#a6ab9a}
 .pu-lista b{white-space:nowrap}
 .pu-sub{display:flex;justify-content:space-between;gap:10px;padding:10px 0 2px;font-weight:700}
+.pu-inv{margin:12px 0 4px;padding:12px 14px;border-radius:8px;background:#fff8e6;border:1px solid #efd9a0}
+.pu-inv>b{display:block;font-size:.86rem;margin-bottom:6px}
+.fila-inv{display:flex;justify-content:space-between;gap:10px;font-size:.9rem}
+.fila-inv b{white-space:nowrap}
+.pu-inv p{font-size:.82rem;color:#6b5a2e;margin:6px 0 8px}
+.fila-inv.tot{border-top:1px solid #efd9a0;padding-top:8px;font-weight:700}
+.final-nota{margin:-6px 0 16px;padding:12px 14px;border-radius:8px;background:#fff8e6;border:1px solid #efd9a0;font-size:.9rem;color:#5b4a1f}
 .detalle{margin:12px 0 4px}
 .detalle summary{cursor:pointer;font-weight:700;font-size:.9rem;color:#4d6b00}
 .ticket .total,.ticket .fin{display:none}
 #cotizar[data-paso="6"] .ticket .total{display:flex}
 #cotizar:not([data-paso="6"]) .detalle,#cotizar:not([data-paso="6"]) #aviso{display:none}
 body[data-paso="6"] .barra-total{display:none!important}
-.cards-color{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cards-color{grid-template-columns:repeat(auto-fit,minmax(92px,1fr))}
 #cotizar .cards-color label,#cotizar .cards-color label:has(input:checked){padding:12px 8px;text-align:center}
 #cotizar .cards-color label:has(input:checked){padding:11px 7px}
 .cards-color label:after{display:none}
@@ -389,13 +396,13 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
  <h2>Así queda<br>tu alfajor.</h2>
  <div class="env-grid">
   <div class="viz"><div class="viz-stage" id="vizStage"></div>
-   <div class="viz-ctrl"><div class="viz-colors" id="vizColors" role="group" aria-label="Color del envoltorio"><span>Envoltorio</span><button type="button" data-color="negro" aria-pressed="true"><i class="sw sw-negro"></i>Negro</button><button type="button" data-color="plateado" aria-pressed="false"><i class="sw sw-plateado"></i>Plateado</button><button type="button" data-color="dorado" aria-pressed="false"><i class="sw sw-dorado"></i>Dorado</button></div>
+   <div class="viz-ctrl"><div class="viz-colors" id="vizColors" role="group" aria-label="Color del envoltorio"><span>Envoltorio</span></div>
    <p class="viz-nota" id="vizNota">Imagen ilustrativa.</p></div></div>
   <div>
    <div class="opciones">
-    <div class="op" data-env="redonda" role="button" tabindex="0" aria-pressed="true"><div class="ic"><i class="c"></i></div><div><h3>Etiqueta redonda · Ø 6 cm</h3><p>Envoltorio liso negro, dorado o plateado con tu etiqueta al frente.</p><span class="tag">Listo en 15 días</span></div></div>
+    <div class="op" data-env="redonda" role="button" tabindex="0" aria-pressed="true"><div class="ic"><i class="c"></i></div><div><h3>Etiqueta redonda · Ø 6 cm</h3><p>Envoltorio liso del color que elijas, con tu etiqueta al frente.</p><span class="tag">Listo en 15 días</span></div></div>
     <div class="op" data-env="rectangular" role="button" tabindex="0" aria-pressed="false"><div class="ic"><i class="r"></i></div><div><h3>Etiqueta rectangular · 5 × 12 cm</h3><p>La etiqueta va de frente a dorso, con más lugar para tu marca y tus textos.</p><span class="tag">Listo en 15 días</span></div></div>
-    <div class="op" data-env="bobina" role="button" tabindex="0" aria-pressed="false"><div class="ic"><i class="b"></i></div><div><h3>Envoltorio impreso full color</h3><p>Tu diseño impreso en todo el paquete, frente y dorso. Los envases que sobran quedan reservados para tus próximos pedidos.</p><span class="tag">Listo en 30 días</span></div></div>
+    <div class="op" data-env="bobina" role="button" tabindex="0" aria-pressed="false"><div class="ic"><i class="b"></i></div><div><h3>Envoltorio impreso full color</h3><p>Tu diseño impreso en todo el paquete, frente y dorso. En el primer pedido comprás la bobina, que rinde para unos 30.000 alfajores; lo que sobra queda reservado para tus próximos pedidos.</p><span class="tag">Listo en 30 días</span></div></div>
    </div>
    <a href="#cotizar" class="btn btn-lima" id="vizCotizar">Cotizar con esta opción →</a>
    <p class="cajas">Tocá cada opción para verla. El alfajor es el mismo en las tres opciones: lo que cambia es cómo va tu marca en el paquete. Sumá cajas display ×12 impresas o corrugadas ×18. <a href="https://viralfa-marcas.arcticghat1.chatgpt.site/ficha-cliente.pdf" target="_blank" rel="noopener">Descargar planos de etiqueta (PDF)</a></p>
@@ -425,7 +432,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
     <div class="wp-nav"><button type="button" class="btn borde" data-ant>← Atrás</button><button type="button" class="btn negro" data-sig>Siguiente: el envase →</button></div></section>
 
    <section class="wp" data-paso="3" hidden><h3><span>3</span>¿Cómo va tu marca en el envoltorio?</h3><p class="wp-ayuda">Esto no cambia la forma del alfajor: es cómo se ve tu marca en el paquete.</p>
-    <div class="envChoices" aria-label="Cómo va tu marca en el envoltorio" role="radiogroup"><label><input type="radio" name="envase" value="redonda" checked><i class="paq p-circ"></i><strong>Etiqueta redonda</strong><small>Ø 6 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="rectangular"><i class="paq p-rect"></i><strong>Etiqueta rectangular</strong><small>5 × 12 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="bobina"><i class="paq p-full"></i><strong>Envoltorio impreso</strong><small>Tu diseño full color en todo el paquete</small></label></div>
+    <div class="envChoices" aria-label="Cómo va tu marca en el envoltorio" role="radiogroup"><label><input type="radio" name="envase" value="redonda" checked><i class="paq p-circ"></i><strong>Etiqueta redonda</strong><small>Ø 6 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="rectangular"><i class="paq p-rect"></i><strong>Etiqueta rectangular</strong><small>5 × 12 cm, sobre envoltorio liso</small></label><label><input type="radio" name="envase" value="bobina"><i class="paq p-full"></i><strong>Envoltorio impreso</strong><small>Tu diseño full color en todo el paquete. En el primer pedido se compra la bobina (rinde ~30.000).</small></label></div>
     <div id="grupoColor"><p class="wp-sub">Color del envoltorio liso</p><div class="cards cards-color" id="cardsColor" role="radiogroup" aria-label="Color del envoltorio"></div><div class="sel-oculto" aria-hidden="true"><select id="color" tabindex="-1"></select></div></div>
     <div class="mini"><div id="miniPaq"></div><small>Vista ilustrativa de tu envase</small></div>
     <p id="tipoEnvase" class="ayudaEnvase"></p>
@@ -444,7 +451,8 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
 
    <section class="wp" data-paso="6" hidden><h3><span>6</span>Tu pedido</h3><p class="wp-ayuda">Revisá tus elecciones. Podés cambiar cualquiera.</p>
     <ul class="resumen" id="resumenLista"></ul>
-    <div class="final"><div><span>Precio por alfajor</span><strong id="finalUnidad">—</strong></div><div><span>Total sin flete</span><strong id="finalTotal">—</strong></div></div>
+    <div class="final"><div><span>Precio por alfajor</span><strong id="finalUnidad">—</strong></div><div><span>Total a pagar sin flete</span><strong id="finalTotal">—</strong></div></div>
+    <p class="final-nota" id="finalNota" hidden></p>
     <button type="button" class="btn btn-lima grande" id="irContacto">Recibir esta cotización →</button>
     <small class="centro">Te la enviamos y la guardás en PDF. Sin compromiso de compra.</small>
     <div class="wp-nav"><button type="button" class="btn borde" data-ant>← Atrás</button><span></span></div></section>
@@ -455,6 +463,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
     <div class="pu"><span id="puEtiqueta">Precio por alfajor</span><strong id="puValor">—</strong><small id="puNota">Calculando…</small></div>
     <ul class="pu-lista" id="puLista"></ul>
     <div class="pu-sub"><span id="puSubEtiq">Subtotal</span><b id="puSub">—</b></div>
+    <div class="pu-inv" id="puInv" hidden><b>Inversión inicial en envoltorio</b><div class="fila-inv"><span>Bobina impresa · rinde ~30.000 alfajores</span><b id="invMonto">—</b></div><p>Se paga una sola vez, en el primer pedido. Los envoltorios que sobran quedan reservados a tu nombre para tus próximos pedidos.</p><div class="fila-inv tot"><span id="invTotEtiq">Total a pagar en este pedido</span><b id="invTotal">—</b></div></div>
     <div id="plazo" aria-live="polite"><strong id="dias"></strong><span id="razonPlazo"></span><small>Desde la aprobación de los diseños finales. El envío a tu localidad se coordina aparte.</small></div>
     <details class="detalle"><summary>Ver detalle completo</summary><p id="descripcion"></p><p id="notaBobina" hidden></p><div id="lineas"></div></details>
     <p id="aviso" role="status">Calculando…</p></div>
@@ -513,7 +522,7 @@ footer{padding:36px 0 110px;border-top:1px solid var(--line);color:var(--muted);
   <details><summary>¿Cómo se paga?</summary><p>50 % de anticipo al confirmar y el saldo antes del despacho. Los precios del cotizador son finales, en pesos y con IVA incluido. El flete se cotiza aparte.</p></details>
   <details><summary>¿Hacen envíos a todo el país?</summary><p>Sí. Coordinamos el envío a cualquier localidad de Argentina y te pasamos el costo según destino y volumen.</p></details>
   <details><summary>¿Puedo probar el alfajor antes de pedir?</summary><p>Sí, con el pack degustación ($20.000, se descuenta de tu primer pedido). Y cuando confirmás, antes de fabricar el lote completo aprobás una muestra con tu marca.</p></details>
-  <details><summary>¿Etiqueta o envoltorio impreso?</summary><p>La etiqueta (redonda o rectangular) se imprime y se pega sobre un envoltorio liso: es la opción más rápida para arrancar. El envoltorio impreso (bobina) lleva tu diseño en todo el paquete, frente y dorso a full color, y conviene si vas a repetir pedidos. En los dos casos el alfajor es el mismo.</p></details>
+  <details><summary>¿Etiqueta o envoltorio impreso?</summary><p>La etiqueta (redonda o rectangular) se imprime y se pega sobre un envoltorio liso: es la opción más rápida para arrancar. El envoltorio impreso (bobina) lleva tu diseño en todo el paquete, frente y dorso a full color, y conviene si vas a repetir pedidos: en el primer pedido comprás una bobina que rinde unos 30.000 envoltorios. El cotizador te muestra esa inversión aparte y el precio por alfajor con la bobina prorrateada. En los dos casos el alfajor es el mismo.</p></details>
   <details><summary>¿Qué pasa si quiero repetir el pedido?</summary><p>Con envoltorio impreso, tu diseño y los envases que sobran quedan reservados a tu nombre, así no volvés a pagar el film. Con etiqueta, las imprimimos de nuevo para cada pedido.</p></details>
  </div>
 </div></section>
@@ -543,7 +552,7 @@ const envases={"redonda":"Etiqueta redonda Ø 6 cm","rectangular":"Etiqueta rect
 const cajas={"ninguna":"Sin caja de presentación","displayImpresa":"Display ×12 · impreso","cartonLisa":"Corrugado ×18 · liso","cartonImpresa":"Corrugado ×18 · impreso"};
 const artes={"necesito":"Primer pedido · necesito diseño","propio":"Primer pedido · envío mi diseño","reposicion":"Reposición con el mismo diseño"};
 const escalas=[500,1000,2000,3000];
-const colores={"negro":"Negro","dorado":"Dorado","plateado":"Plateado"};
+let colores={"negro":"Negro","plateado":"Plateado","dorado":"Dorado"};
 function produccion(p) {
  const motivos=[];
  if(p.caja==="displayImpresa") motivos.push("display impreso ×12");
@@ -571,7 +580,7 @@ async function cargarCatalogo(){
  const id=$("sabor").value,g=$("gramos").value;$("continuar").disabled=true;
  try{
   const resp=await fetch(servicio+"/api/catalogo",{credentials:"omit",cache:"no-store",signal:AbortSignal.timeout(12000)});
-  if(!resp.ok)throw Error();const d=await resp.json();catalogo=d.productos;minimoBobina=d.minKg;
+  if(!resp.ok)throw Error();const d=await resp.json();catalogo=d.productos;minimoBobina=d.minKg;if(d.colores&&typeof d.colores==="object"&&Object.keys(d.colores).length){const prev=$("color").value;colores=d.colores;$("color").replaceChildren();sel("color",colores);if(colores[prev])$("color").value=prev}
   $("sabor").replaceChildren();catalogo.forEach(x=>$("sabor").add(new Option(x.nombre,x.id)));
   if(catalogo.some(x=>x.id===id))$("sabor").value=id;llenarPesos(g);
   $("notaCatalogo").textContent=catalogo.length?"":"Por el momento no hay variedades publicadas. Escribinos por WhatsApp para consultar.";$("reintentar").hidden=true;
@@ -582,7 +591,7 @@ $("reintentar").onclick=cargarCatalogo;
 const getP=()=>{const p={unidades:$("unidades").valueAsNumber,sabor:$("sabor").value,gramos:Number($("gramos").value),envase:document.querySelector('[name="envase"]:checked').value,caja:$("caja").value,arte:$("arte").value};if(p.envase==="bobina"&&p.arte==="reposicion"&&$("reserva").value.trim())p.reserva=$("reserva").value.trim().toUpperCase();if(eligeColor(p))p.color=$("color").value;return p};
 const texto=(tag,t)=>{const n=document.createElement(tag);n.textContent=t;return n};
 function fila(el,t,v){const x=document.createElement("div");x.className="fila";x.append(texto("span",t),texto("b",v));el.append(x)}
-const resumen=(p,producto)=>num(p.unidades)+" alfajores · "+(producto?.nombre??catalogo.find(x=>x.id===p.sabor)?.nombre??"Producto")+" · "+(producto?.gramos??p.gramos)+" g"+" · "+envases[p.envase]+(p.color?" · envoltorio "+colores[p.color].toLowerCase():"")+" · "+cajas[p.caja];
+const resumen=(p,producto)=>num(p.unidades)+" alfajores · "+(producto?.nombre??catalogo.find(x=>x.id===p.sabor)?.nombre??"Producto")+" · "+(producto?.gramos??p.gramos)+" g"+" · "+envases[p.envase]+(p.color?" · envoltorio "+(colores[p.color]||p.color).toLowerCase():"")+" · "+cajas[p.caja];
 function lineas(el,p,r){el.replaceChildren();const i=r.importes;
  if(i){fila(el,"Costo x alfajor",pesos(i.unidad));fila(el,"Alfajores × "+num(p.unidades),pesos(i.alfajores));if(p.envase==="bobina"){fila(el,p.arte==="reposicion"?"Film ya pagado":"Compra inicial · bobina digital full color",pesos(i.material));fila(el,"Trabajo de envasar el lote",pesos(i.mano));}else fila(el,"Envase, impresión y pegado de etiqueta (lote)",pesos(i.envase));fila(el,p.envase==="bobina"&&p.arte!=="reposicion"?"Promedio por alfajor con compra inicial":"Alfajor envasado por unidad",pesos(i.envasado));}
  if(r.cantCajas)fila(el,num(r.cantCajas)+" cajas ×"+r.capacidad+(i?" a "+pesos(i.cajaUnidad):""),i?pesos(i.cajasTotal):"A confirmar");
@@ -643,8 +652,9 @@ $("pdf").onclick=()=>window.print();$("otro").onclick=()=>{location.hash="cotiza
 function vfPaquete(env, color, uid){
  const P={negro:["#060606","#2a2a2a","#101010","#363636","#070707"],
   plateado:["#7d8288","#eceef0","#a9aeb3","#fafbfc","#8c9196"],
-  dorado:["#7a5a14","#efcd72","#ad8427","#f7e4a0","#8d6a1b"]};
- const c=P[color]||P.negro, g="vf"+uid, impreso=env==="bobina";
+  dorado:["#7a5a14","#efcd72","#ad8427","#f7e4a0","#8d6a1b"],
+  aluminio:["#6e4a0c","#f9dc82","#9c6d14","#fff3c4","#c08f2a","#7a540f"]};
+ const c=P[color]||P.negro, g="vf"+uid, impreso=env==="bobina", foil=color==="aluminio"&&!impreso;
  const stops=(a)=>a.map((h,i)=>`<stop offset="${(i/(a.length-1)).toFixed(2)}" stop-color="${h}"/>`).join("");
  let zz="";for(let y=44,k=0;y<=276;y+=8,k++)zz+=`${k%2?28:21},${y} `;
  let zzR="";for(let y=44,k=0;y<=276;y+=8,k++)zzR+=`${k%2?392:399},${y} `;
@@ -658,12 +668,13 @@ function vfPaquete(env, color, uid){
   <pattern id="${g}cr" width="4" height="10" patternUnits="userSpaceOnUse"><path d="M1 0V10" stroke="#000" stroke-opacity=".28" stroke-width="1.2"/></pattern>
   <pattern id="${g}st" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><rect width="26" height="26" fill="none"/><rect width="9" height="26" fill="#0b0b0b" opacity=".14"/></pattern>
   <clipPath id="${g}cp">${cuerpo}</clipPath>
+  <filter id="${g}fo" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".022 .05" numOctaves="3" seed="11" result="n"/><feDiffuseLighting in="n" lighting-color="#fff" surfaceScale="3.2" result="l"><feDistantLight azimuth="225" elevation="48"/></feDiffuseLighting><feComposite in="l" in2="SourceGraphic" operator="arithmetic" k1="1.35" k2="0" k3="0" k4="0"/></filter>
   <filter id="${g}sh" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
   <filter id="${g}ls" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-opacity=".35"/></filter>
  </defs>
  <ellipse cx="210" cy="306" rx="176" ry="12" fill="#000" opacity=".55" filter="url(#${g}sh)"/>
  <g clip-path="url(#${g}cp)">
-  <rect x="0" y="0" width="420" height="330" fill="url(#${g}b)"/>`;
+  <rect x="0" y="0" width="420" height="330" fill="url(#${g}b)"${foil?` filter="url(#${g}fo)"`:""}/>`;
  if(impreso){
   s+=`<rect x="0" y="0" width="420" height="330" fill="url(#${g}st)"/>
   <circle cx="330" cy="70" r="70" fill="#7b2cff" opacity=".85"/><circle cx="92" cy="268" r="58" fill="#ff3d81" opacity=".8"/>
@@ -700,22 +711,23 @@ function vfPaquete(env, color, uid){
 }
 /* Visualizador de envases y vista previa en el cotizador */
 (function(){
- const stage=document.getElementById("vizStage"),ops=[...document.querySelectorAll(".op[data-env]")],box=document.getElementById("vizColors"),cols=[...box.querySelectorAll("button")],nota=document.getElementById("vizNota");
- let env="redonda",color="negro";
- const nombres={redonda:"etiqueta redonda Ø 6 cm",rectangular:"etiqueta rectangular 5 × 12 cm"};
+ const stage=document.getElementById("vizStage"),ops=[...document.querySelectorAll(".op[data-env]")],box=document.getElementById("vizColors"),nota=document.getElementById("vizNota"),selColor=document.getElementById("color");
+ let env="redonda",color="negro",cols=[];
+ const armarChips=()=>{cols.forEach(b=>b.remove());cols=[...selColor.options].map(o=>{const b=document.createElement("button"),i=document.createElement("i");b.type="button";b.dataset.color=o.value;i.className="sw sw-"+o.value;b.append(i,o.text);b.addEventListener("click",()=>{color=o.value;pintar()});box.append(b);return b});if(!cols.some(b=>b.dataset.color===color))color="negro"};
+ const nombres={redonda:"etiqueta redonda Ø 6 cm",rectangular:"etiqueta rectangular 5 × 12 cm"},nombreColor=()=>(selColor.querySelector('option[value="'+color+'"]')||{text:color}).text.toLowerCase();
  const pintar=()=>{
   ops.forEach(o=>o.setAttribute("aria-pressed",String(o.dataset.env===env)));
   cols.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.color===color)));
   box.hidden=env==="bobina";
   stage.innerHTML=env==="bobina"?'<img src="img/packaging.webp" alt="Ejemplo de alfajor con envoltorio impreso full color" width="1200" height="800">':vfPaquete(env,color,"viz");
-  nota.textContent=env==="bobina"?"Ejemplo de diseño impreso en todo el envoltorio, frente y dorso.":"Imagen ilustrativa: "+nombres[env]+" sobre envoltorio "+color+".";
+  nota.textContent=env==="bobina"?"Ejemplo de diseño impreso en todo el envoltorio, frente y dorso.":"Imagen ilustrativa: "+nombres[env]+" sobre envoltorio "+nombreColor()+".";
  };
  ops.forEach(o=>{const elegir=()=>{env=o.dataset.env;pintar()};o.addEventListener("click",elegir);o.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();elegir()}})});
- cols.forEach(b=>b.addEventListener("click",()=>{color=b.dataset.color;pintar()}));
  document.getElementById("vizCotizar").addEventListener("click",()=>{
   const r=document.querySelector('[name=envase][value="'+env+'"]');if(r&&!r.checked){r.checked=true;r.dispatchEvent(new Event("input",{bubbles:true}))}
   const sel=document.getElementById("color");if(env!=="bobina"&&sel.value!==color&&[...sel.options].some(o=>o.value===color)){sel.value=color;sel.dispatchEvent(new Event("input",{bubbles:true}))}
  });
+ armarChips();new MutationObserver(()=>{armarChips();pintar()}).observe(selColor,{childList:true});
  pintar();
  const mini=document.getElementById("miniPaq"),form=document.getElementById("elecciones");
  const pintarMini=()=>{const e=(document.querySelector("[name=envase]:checked")||{}).value||"redonda";mini.innerHTML=vfPaquete(e,document.getElementById("color").value||"negro","mini")};
@@ -728,7 +740,7 @@ function vfPaquete(env, color, uid){
  let paso=1,maxPaso=1;
  const info={caja:{ninguna:"Solo los alfajores envasados.",displayImpresa:"Exhibidor de mostrador con tu marca. Producción en 30 días.",cartonLisa:"Caja de cartón lisa para transporte y stock.",cartonImpresa:"Caja de cartón con tu marca impresa."},
   arte:{necesito:"Lo diseñamos con vos. Pago único en el primer pedido.",propio:"Nos mandás tu archivo listo, según el plano.",reposicion:"Repetís un pedido con el mismo diseño."}};
- const swc={negro:"sw-negro",dorado:"sw-dorado",plateado:"sw-plateado"};
+ const swc={negro:"sw-negro",dorado:"sw-dorado",plateado:"sw-plateado",aluminio:"sw-aluminio"};
  const prod=id=>(catalogo||[]).find(x=>x.id===id);
  function tarjetas(selId,contId){
   const s=g(selId),c=g(contId);
@@ -780,26 +792,33 @@ function vfPaquete(env, color, uid){
  new MutationObserver(()=>{if(!g("ok").hidden){g("irContacto").hidden=true}}).observe(g("ok"),{attributes:true,attributeFilter:["hidden"]});
 
  let ultimoValor="";
+ const RINDE_BOBINA=30000; /* envoltorios que rinde la bobina de la compra inicial */
  function panel(){
   const r=ultimo,u=Number(g("unidades").value)||0,p=getP(),lista=g("puLista"),val=g("puValor");
-  const filas=[[2,"Alfajor"],[3,p.envase==="bobina"?"Envoltorio impreso":"Envoltorio y etiqueta"],[4,"Cajas"],[5,"Diseño"]];
   const hasta=Math.max(2,Math.min(paso,5)),i=r&&r.importes;
-  const montos=i?{2:i.alfajores||0,3:p.envase==="bobina"?(i.material||0)+(i.mano||0):(i.envase||0),4:r.cantCajas?(i.cajasTotal||0):0,5:p.arte==="necesito"?(i.diseno||0):0}:{};
+  const bobIni=!!(i&&p.envase==="bobina"&&(i.material||0)>0);
+  const parte=bobIni?Math.round(i.material*Math.min(u,RINDE_BOBINA)/RINDE_BOBINA):0;
+  const filas=[[2,"Alfajor"],[3,p.envase==="bobina"?(bobIni?"Envoltorio impreso (bobina prorrateada)":"Envoltorio impreso"):"Envoltorio y etiqueta"],[4,"Cajas"],[5,"Diseño"]];
+  const montos=i?{2:i.alfajores||0,3:p.envase==="bobina"?(bobIni?parte:(i.material||0))+(i.mano||0):(i.envase||0),4:r.cantCajas?(i.cajasTotal||0):0,5:p.arte==="necesito"?(i.diseno||0):0}:{};
   lista.replaceChildren();let sub=0;
   filas.forEach(([n,nombre])=>{const li=document.createElement("li"),a=document.createElement("span"),b=document.createElement("b");a.textContent=nombre;
    if(n>hasta){li.className="pend";b.textContent="Paso "+n}
    else if(!i){b.textContent="…"}
    else{const m=montos[n];sub+=m;b.textContent=m?((n===2?"":"+ ")+pesos(Math.round(m/u))+" c/u"):(n===4?"Sin cajas":"Sin costo")}
    li.append(a,b);lista.append(li)});
-  if(i&&hasta>=5)sub=i.total;
-  const calc=g("total").textContent==="Calculando…";
+  if(i&&hasta>=5)sub=i.total-(bobIni?i.material-parte:0);
+  const calc=g("total").textContent==="Calculando…",inv=bobIni&&hasta>=3;
+  g("puInv").hidden=!inv;g("finalNota").hidden=!bobIni;
   if(!i||!u){val.textContent=calc?"…":"A consultar";g("puNota").textContent=calc?"Calculando…":"Te confirmamos el precio de esta combinación.";g("puSub").textContent="—";g("finalUnidad").textContent=val.textContent;g("finalTotal").textContent=g("total").textContent;return}
   const pu=pesos(Math.round(sub/u));
   val.textContent=pu;if(pu!==ultimoValor){val.classList.add("cambio");setTimeout(()=>val.classList.remove("cambio"),700);ultimoValor=pu}
   g("puEtiqueta").textContent=hasta>=5?"Precio final por alfajor":"Precio por alfajor";
-  g("puNota").textContent=["","","Alfajor sin envase. Faltan envase, cajas y diseño.","Alfajor envasado con tu marca. Faltan cajas y diseño.","Alfajor envasado con cajas. Falta el diseño.","Todo incluido, con IVA. Sin flete."][hasta];
-  g("puSubEtiq").textContent="Subtotal · "+num(u)+" alfajores";g("puSub").textContent=pesos(sub);
-  g("finalUnidad").textContent=pesos(Math.round(i.total/u));g("finalTotal").textContent=pesos(i.total);
+  const falta=["","","Faltan envase, cajas y diseño.","Faltan cajas y diseño.","Falta el diseño.",""][hasta];
+  g("puNota").textContent=inv?("Con la bobina prorrateada en "+num(RINDE_BOBINA)+" alfajores. "+(falta||"Todo incluido, con IVA. Sin flete.")):["","","Alfajor sin envase. Faltan envase, cajas y diseño.","Alfajor envasado con tu marca. Faltan cajas y diseño.","Alfajor envasado con cajas. Falta el diseño.","Todo incluido, con IVA. Sin flete."][hasta];
+  g("puSubEtiq").textContent=(inv?"Valor de este pedido · ":"Subtotal · ")+num(u)+" alfajores";g("puSub").textContent=pesos(sub);
+  if(inv){g("invMonto").textContent=pesos(i.material);const tot=hasta>=5?i.total:sub-parte+i.material;g("invTotal").textContent=pesos(tot);g("invTotEtiq").textContent=hasta>=5?"Total a pagar en este pedido":"Total a pagar hasta acá"}
+  g("finalUnidad").textContent=pesos(Math.round((i.total-(bobIni?i.material-parte:0))/u));g("finalTotal").textContent=pesos(i.total);
+  if(bobIni)g("finalNota").textContent="El total incluye la compra inicial de la bobina impresa ("+pesos(i.material)+"), que rinde para unos "+num(RINDE_BOBINA)+" alfajores. Se paga una sola vez: en tus próximos pedidos usás los envoltorios que quedan reservados a tu nombre. El precio por alfajor es con la bobina prorrateada.";
  }
  new MutationObserver(panel).observe(g("total"),{childList:true,characterData:true,subtree:true});
  ir(1,false);
